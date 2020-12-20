@@ -6,6 +6,9 @@ import ReactLoading from "react-loading";
 import AuthContext from "./contexts/auth";
 import { useAsync } from "react-hook-async";
 import { Dashboard } from "./components/dashboard";
+import RoomList from "./components/room_list/RoomList";
+import PostDetail from "./components/post_detail/PostDetail";
+
 import { me } from "./api/profile";
 import Setting from "./components/setting";
 import Profile from "./components/setting/profile";
@@ -47,6 +50,11 @@ function App() {
           <Route path="/setting" component={Setting} />
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
+          <Route path="/room_list" component={RoomList} />
+          <Route path="/post_detail" component={PostDetail} />
+
+
+
         </Switch>
       </div>
     </AuthContext.Provider>

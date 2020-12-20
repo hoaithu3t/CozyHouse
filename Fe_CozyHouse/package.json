@@ -16,6 +16,7 @@
     "react-hook-async": "^2.1.2",
     "react-loading": "^2.0.3",
     "react-redux": "^7.2.0",
+    "react-responsive-carousel": "^3.2.11",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-share": "^4.1.0",
