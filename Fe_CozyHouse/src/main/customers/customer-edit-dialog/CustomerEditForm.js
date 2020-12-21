@@ -82,15 +82,15 @@ export function CustomerEditForm({
                     }}
                     row>
                     <FormControlLabel
-                      value={CustomerType.Enterprise}
+                      value={CustomerType.Renter}
                       control={<Radio />}
-                      label= "Chủ trọ"
+                      label= "Người thuê"
                       labelPlacement="end"
                     />
                     <FormControlLabel
-                      value={CustomerType.Personal}
+                      value={CustomerType.Owner}
                       control={<Radio />}
-                      label= "Người thuê"
+                      label= "Chủ trọ"
                       labelPlacement="end"
                     />
                   </RadioGroup>
@@ -179,9 +179,9 @@ export function CustomerEditForm({
                       )}
                   </div>
                 </div>
-
-                {/* Phone */}
+                {/* SDT/ Giới tính */}
                 <div className="form-group row">
+                {/* Phone */}
                   <div className="col-lg-6">
                     <Field
                       name="phone"
@@ -207,34 +207,8 @@ export function CustomerEditForm({
                         </p>
                       )}
                   </div>
-                  {/* Address */}
+                  {/* IP Gender */}
                   <div className="col-lg-6">
-                    <Field
-                      name="address"
-                      component={Input}
-                      placeholder="Địa chỉ"
-                      label="Địa chỉ"
-                      disabled={disabled}
-                    />
-                    {disabled &&
-                      customer.customerHistory &&
-                      customer.customerHistory.address !== customer.address && (
-                        <p className="text-warning m-2 text-smail">
-                          <span className="mr-3">
-                            Dữ liệu cũ:
-                          </span>
-                          {customer.customerHistory.address}
-                        </p>
-                      )}
-                  </div>
-                </div>
-
-                {values.customerType === CustomerType.Owner && (
-                  <>
-                    <div className="form-group row">
-                      {/* IP Gender */}
-
-                      <div className="col-lg-4">
                         {disabled ? (
                           <>
                             <Field
@@ -267,7 +241,88 @@ export function CustomerEditForm({
                         )}
                       </div>
                       {/* Date of birth */}
-
+                </div>
+                {/* Mật khẩu/ Xác nhận mật khẩu */}
+                <div className="form-group row">
+                {/*Mật khẩu*/}
+                  <div className="col-lg-6">
+                    <Field
+                      name="passWord"
+                      component={Input}
+                      placeholder="Mật khẩu"
+                      label={
+                        <>
+                          Mật khẩu
+                          <span className="text-danger"> * </span>
+                        </>
+                      }
+                      type = "password"
+                      withFeedbackLabel={true}
+                      disabled={disabled}
+                    />
+                    {disabled &&
+                      customer.customerHistory &&
+                      customer.customerHistory.phone !== customer.phone && (
+                        <p className="text-warning m-2 text-smail">
+                          <span className="mr-3">
+                            Dữ liệu cũ:
+                          </span>
+                          {customer.customerHistory.phone}
+                        </p>
+                      )}
+                  </div>
+                {/* Xác nhận mật khẩu */}
+                <div className="col-lg-6">
+                    <Field
+                      name="confirmPassWord"
+                      component={Input}
+                      placeholder="Xác nhận mật khẩu"
+                      label={
+                        <>
+                          Xác nhận mật khẩu
+                          <span className="text-danger"> * </span>
+                        </>
+                      }
+                      type = "password"
+                      withFeedbackLabel={true}
+                      disabled={disabled}
+                    />
+                    {disabled &&
+                      customer.customerHistory &&
+                      customer.customerHistory.phone !== customer.phone && (
+                        <p className="text-warning m-2 text-smail">
+                          <span className="mr-3">
+                            Dữ liệu cũ:
+                          </span>
+                          {customer.customerHistory.phone}
+                        </p>
+                      )}
+                  </div>
+                {/* Xác nhận mật khẩu */}
+                </div>
+                {values.customerType === CustomerType.Owner && (
+                  <>
+                    <div className="form-group row">
+                      {/* Address */}
+                  <div className="col-lg-4">
+                    <Field
+                      name="address"
+                      component={Input} 
+                      placeholder="Địa chỉ"
+                      label="Địa chỉ"
+                      disabled={disabled}
+                    />
+                    {disabled &&
+                      customer.customerHistory &&
+                      customer.customerHistory.address !== customer.address && (
+                        <p className="text-warning m-2 text-smail">
+                          <span className="mr-3">
+                            Dữ liệu cũ:
+                          </span>
+                          {customer.customerHistory.address}
+                        </p>
+                      )}
+                  </div>
                       <div className="col-lg-4">
                         {disabled ? (
                           <>
@@ -329,10 +384,13 @@ export function CustomerEditForm({
                   </>
                 ) 
                 }
-
-               
               </Form>
             </Modal.Body>
+
+
+
+
+
             {customer.reasonReject && (
               <div className="m-3">
                 "Lý do từ chối duyệt"
