@@ -43,7 +43,7 @@ export const initCustomer = {
   socialIdOrBusinessLicense: '',
   bankAccount: '',
   branchId: '', // bank branch Id
-  customerType: CustomerType.Enterprise,
+  customerType: CustomerType.Renter,
   taxCode: '',
   legalRepresentative: '',
   activeTime: '',
