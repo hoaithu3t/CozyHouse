@@ -11,8 +11,8 @@ export const CustomerStatus = {
   Reject : 2,
 }
 export const CustomerType = {
-  Enterprise : 0,
-  Personal : 1,
+  Owner : 0,
+  Renter : 1,
 }
 export const defaultSorted = [{ dataField: 'id', order: 'asc' }];
 export const sizePerPageList = [
