@@ -18,7 +18,6 @@ const SignInSchema = Yup.object().shape({
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Confirm password not matched!")
     .required("Required"),
-  policy: Yup.boolean().oneOf([true], "Must Accept Terms and Conditions"),
 });
 
 const Register = (props) => {
@@ -31,18 +30,22 @@ const Register = (props) => {
     validationSchema: SignInSchema,
     initialValues: {
       username: "",
+      CMND: "",
+      address: "",
+      phone: "",   
+      email:"",
       password: "",
       confirmPassword: "",
-      bio: "",
-      education: "",
-      policy: false,
     },
     onSubmit: (values) => {
+      console.log("oke")
       fetchRegister(
-        values.username,
-        values.password,
-        values.bio,
-        values.education
+        values.username,        
+        values.CMND,
+        values.address,
+        values.phone,   
+        values.email,
+        values.password
       )
         .then(() => {
           setSuccessModalVisible(true);
@@ -67,6 +70,8 @@ const Register = (props) => {
           </Modal.Header>
     <Modal.Body>
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
+
+          {/* họ tên */}
           <Form.Group controlId="formBasicUsername" className="text-left">
             <Form.Label>Họ tên</Form.Label>
             <Form.Control
@@ -82,6 +87,71 @@ const Register = (props) => {
             </Form.Control.Feedback>
           </Form.Group>
 
+           {/* CMND */}
+          <Form.Group controlId="formCMND" className="text-left">
+            <Form.Label>CHứng minh nhân dân</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="CMND"
+              value={formik.values.CMND}
+              isInvalid={formik.errors.CMND}
+              placeholder="Nhập số CMND"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.CMND}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+           {/* Địa chỉ */}
+          <Form.Group controlId="formAddress" className="text-left">
+            <Form.Label>Địa chỉ</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="address"
+              value={formik.values.address}
+              isInvalid={formik.errors.address}
+              placeholder="Nhập địa chỉ"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.address}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+           {/* số điện thoại */}
+          <Form.Group controlId="formPhone" className="text-left">
+            <Form.Label>Số điện thoại</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="phone"
+              value={formik.values.phone}
+              isInvalid={formik.errors.phone}
+              placeholder="Nhập số điện thoại"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.phone}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+           {/* email */}
+          <Form.Group controlId="formEmail" className="text-left">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="email"
+              value={formik.values.username}
+              isInvalid={formik.errors.username}
+              placeholder="Nhập email"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          {/* Mật khẩu */}
           <Form.Group controlId="formBasicPassword" className="text-left">
             <Form.Label>Mật khẩu</Form.Label>
             <Form.Control
@@ -116,22 +186,7 @@ const Register = (props) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group controlId="formBasicPassword" className="text-left">
-            <Form.Label>Số điện thoại</Form.Label>
-            <Form.Control
-              type="text"
-              onChange={formik.handleChange}
-              name="phone"
-              isInvalid={formik.errors.phone}
-              value={formik.values.phone}
-              placeholder="Số điện thoại"
-            />
-
-            <Form.Control.Feedback type="invalid">
-              {formik.errors.bio}
-            </Form.Control.Feedback>
-          </Form.Group>
-
+          
          
           <Button
             className="m-color border-none"
@@ -139,7 +194,7 @@ const Register = (props) => {
             style={{ width: "60%" }}
             disabled={registerApiData.loading}
           >
-            {registerApiData.loading ? "Registering" : "Register"}
+            {registerApiData.loading ? "Đang đăng ký" : "Đăng ký"}
           </Button>
           <Form.Label>
             Bạn đã có tài khoản? &nbsp;

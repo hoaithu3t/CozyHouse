@@ -37,10 +37,10 @@ const Login = (props) => {
     initialValues: {
       username: "",
       password: "",
-      rememberMe: false,
+      rememberMe: true,
     },
     onSubmit: (values) => {
-      fetchLogin(values.username, values.password)
+      fetchLogin(values.username, values.password, values.rememberMe)
         .then((authUser) => {
           localStorage.setItem("session", authUser.session);
           if (values.rememberMe) {
@@ -99,16 +99,7 @@ const Login = (props) => {
               {formik.errors.password}
             </Form.Control.Feedback>
           </Form.Group>
-
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check
-              type="checkbox"
-              label="Remember me"
-              name="rememberMe"
-              value={formik.values.rememberMe}
-              onChange={formik.handleChange}
-            />
-          </Form.Group>
+          
           <Button
             className="m-color border-none"
             type="submit"
