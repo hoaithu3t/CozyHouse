@@ -57,7 +57,7 @@ namespace CozyHouse.Users
 
         private AppUser()
         {
-            
+                        
         }
     }
 }

@@ -129,7 +129,10 @@ const Header = () => {
 
         </div>
         ) : (
+            <>
           <Avatar size="xl" src={authUser.user.photoUrl} />
+              <span>{authUser.user.username}</span>
+              </>
         )}
         <Login 
             show = {modalShowLogin} 
@@ -147,9 +150,6 @@ const Header = () => {
               }
             } 
             onHide = {() => {setModalShowRegister(false)}}/>
-        
-        {/* <AuthModal show={modalShowRegister || modalShowLogin} haveAccount = {haveAccount} 
-        onHide={() =>modalShowLogin ? setModalShowLogin(false) : setModalShowRegister(false)} /> */}
 
       </Navbar>
     </>

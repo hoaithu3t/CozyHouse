@@ -10,25 +10,26 @@ import { me } from "./api/profile";
 import Setting from "./components/setting";
 import Profile from "./components/setting/profile";
 import Auth from "./components/auth/index";
+import Customer from "./main/customers/Customers"
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
 
   const [profileApi, fetchProfile] = useAsync(null, me);
-  useEffect(() => {
-    if (!authUser) {
-      const jwt = localStorage.getItem("jwt");
-      const ss = localStorage.getItem("session");
-      debugger;
-      if (jwt !== null && jwt) {
-        console.log("here" + jwt + "1");
-        fetchProfile(jwt).then((user) => setAuthUser(user));
-      } else if (ss) {
-        console.log("here" + ss);
-        fetchProfile(ss).then((user) => setAuthUser(user));
-      }
-    }
-  }, [authUser, fetchProfile, setAuthUser]);
+  // useEffect(() => {
+  //   if (!authUser) {
+  //     const jwt = localStorage.getItem("jwt");
+  //     const ss = localStorage.getItem("session");
+  //     debugger;
+  //     if (jwt !== null && jwt) {
+  //       console.log("here" + jwt + "1");
+  //       fetchProfile(jwt).then((user) => setAuthUser(user));
+  //     } else if (ss) {
+  //       console.log("here" + ss);
+  //       fetchProfile(ss).then((user) => setAuthUser(user));
+  //     }
+  //   }
+  // }, [authUser, fetchProfile, setAuthUser]);
 
   if (profileApi.loading) {
     return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/setting" component={Setting} />
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
+          <Route path="/customer" component={Customer} />
         </Switch>
       </div>
     </AuthContext.Provider>
