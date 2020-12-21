@@ -126,7 +126,7 @@ export default function Customers({ history }) {
           />
         )}
       </Route>
-      <Route path="/customer/:id/reject">
+      <Route path="/customer/:id/r6eject">
         {({ history, match }) => (
           <CustomerRejectDialog
             show={match != null}
@@ -138,7 +138,7 @@ export default function Customers({ history }) {
             }}
           />
         )}
-      </Route>
+      </Route>yth78
       {/* <Route path="/customers/fetch">
         {({ history, match }) => (
           <CustomersFetchDialog

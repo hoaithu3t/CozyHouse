@@ -64,7 +64,7 @@ export function CustomerEditForm({
                 </div>
               )}
               <Form className="form form-label-right">
-                {/* doanh nghiep va khach hang */}
+               {/* chủ trọ và người thuê */}
                 <FormControl component="fieldset">
                   <RadioGroup
                     aria-label="position"
@@ -95,13 +95,13 @@ export function CustomerEditForm({
                     />
                   </RadioGroup>
                 </FormControl>
-                {/* chủ trọ và người thuê */}
+                {/* chủ trọ hay người thuê */}
                 <div className="form-group row">
                   {/* Name */}
-                  {values.customerType === CustomerType.Personal ? (
+                  {values.customerType === CustomerType.Owner ? (
                     <div className="col-lg-6">
                       <Field
-                        name="name"
+                        name="username"
                         component={Input}
                         placeholder= "Tên chủ trọ"
                         label={
@@ -115,19 +115,19 @@ export function CustomerEditForm({
                       />
                       {disabled &&
                         customer.customerHistory &&
-                        customer.customerHistory.name !== customer.name && (
+                        customer.customerHistory.username !== customer.username && (
                           <p className="text-warning m-2 text-smail">
                             <span className="mr-3">
                               Dữ liệu cũ
                             </span>
-                            {customer.customerHistory.name}
+                            {customer.customerHistory.username}
                           </p>
                         )}
                     </div>
                   ) : (
                     <div className="col-lg-6">
                       <Field
-                        name="name"
+                        name="username"
                         component={Input}
                         placeholder="Tên người thuê"
                         label={
@@ -229,7 +229,7 @@ export function CustomerEditForm({
                   </div>
                 </div>
 
-                {values.customerType === CustomerType.Personal ? (
+                {values.customerType === CustomerType.Owner && (
                   <>
                     <div className="form-group row">
                       {/* IP Gender */}
@@ -327,11 +327,8 @@ export function CustomerEditForm({
                       </div>
                     </div>
                   </>
-                ) : (
-                  <>
-                   
-                  </>
-                )}
+                ) 
+                }
 
                
               </Form>
