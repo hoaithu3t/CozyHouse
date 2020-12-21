@@ -16,20 +16,20 @@ function App() {
   const [authUser, setAuthUser] = useState(null);
 
   const [profileApi, fetchProfile] = useAsync(null, me);
-  // useEffect(() => {
-  //   if (!authUser) {
-  //     const jwt = localStorage.getItem("jwt");
-  //     const ss = localStorage.getItem("session");
-  //     debugger;
-  //     if (jwt !== null && jwt) {
-  //       console.log("here" + jwt + "1");
-  //       fetchProfile(jwt).then((user) => setAuthUser(user));
-  //     } else if (ss) {
-  //       console.log("here" + ss);
-  //       fetchProfile(ss).then((user) => setAuthUser(user));
-  //     }
-  //   }
-  // }, [authUser, fetchProfile, setAuthUser]);
+  useEffect(() => {
+    if (!authUser) {
+      const jwt = localStorage.getItem("jwt");
+      const ss = localStorage.getItem("session");
+      debugger;
+      if (jwt !== null && jwt) {
+        console.log("here" + jwt + "1");
+        fetchProfile(jwt).then((user) => setAuthUser(user));
+      } else if (ss) {
+        console.log("here" + ss);
+        fetchProfile(ss).then((user) => setAuthUser(user));
+      }
+    }
+  }, [authUser, fetchProfile, setAuthUser]);
 
   if (profileApi.loading) {
     return (

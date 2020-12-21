@@ -2,6 +2,11 @@ const fs = require("fs");
 const path = require("path");
 const { User } = require("../models/user");
 const ERROR = require("../types/error");
+const {
+  Role,
+  Gender,
+  StatusCustomer
+} = require("../public/customer");
 
 const getAllCustomers = async () => {
   const customer = await User.aggregate()
@@ -31,21 +36,21 @@ const getCustomer = async (id) => {
 };
 
 const updateCustomer = async (id, customer) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, customer, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, { ...customer, status: StatusCustomer.NotApprove }, {
     new: true,
   });
   return newCustomer;
 };
 
 const approveCustomer = async (id) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: 1}, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: StatusCustomer.Approve}, {
     new: true,
   });
   return newCustomer;
 };
 
 const rejectCustomer = async (id, reason) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: 0, reasonReject: reason}, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: StatusCustomer.Reject, reasonReject: reason}, {
     new: true,
   });
   return newCustomer;

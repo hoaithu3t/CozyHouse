@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
+
 const userSchema = mongoose.Schema(
   {
     username: {
@@ -19,8 +20,11 @@ const userSchema = mongoose.Schema(
     address: String,
     phone: String,   
     email: String,
-    role: String,
+    dateOfBirth: Date,
+    gender: Number,
+    role: Number,
     status: Number,
+    reasonReject : String,
     photoUrl: String
   },
   {

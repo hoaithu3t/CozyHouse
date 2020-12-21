@@ -7,11 +7,10 @@ const {
 } = require("../services/auth");
 const ERROR = require("../types/error");
 
-router.post("/register", (req, res) => {
-  const { username, CMND, address, phone,email, password, role } = req.body;
-  register(username, CMND, address, phone,email, password, role )
+router.post("/register", (req, res) => { 
+  register(req.body )
     .then((result) => {
-      res.json({ success: true });
+      res.json({ success: true, result: result });
     })
     .catch((err) => {
       switch (err.message) {
