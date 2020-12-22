@@ -24,15 +24,18 @@ export function ActionsColumnFormatter(
     hasDeletePermission,
   },
 ) {
+  const pStyle = {
+    width : "100px"
+  }
   return (
     <>
       {/* {hasApprovePermission && */}
         {/* row.customerStatus === CustomerStatus.NotApprove && ( */}
           <>
-            <OverlayTrigger
+            <OverlayTrigger 
               overlay={
-                <Tooltip id="customers-approve-tooltip">
-                  {('IPay::ApproveCustomer')}
+                <Tooltip  style={pStyle} id="customers-approve-tooltip">
+                  {('Phê duyệt')}
                 </Tooltip>
               }>
               <a
@@ -43,8 +46,8 @@ export function ActionsColumnFormatter(
             </OverlayTrigger>
             <OverlayTrigger
               overlay={
-                <Tooltip id="customers-reject-tooltip">
-                  {('IPay::RejectCustomer')}
+                <Tooltip  style={pStyle} id="customers-reject-tooltip">
+                  {('Từ Chối')}
                 </Tooltip>
               }>
               <a
@@ -58,7 +61,7 @@ export function ActionsColumnFormatter(
         {/* )} */}
       <OverlayTrigger
         overlay={
-          <Tooltip id="customers-detail-tooltip">
+          <Tooltip  style={pStyle} id="customers-detail-tooltip">
             Xem chi tiết
           </Tooltip>
         }>
@@ -72,8 +75,8 @@ export function ActionsColumnFormatter(
       {/* {hasEditPermission && ( */}
         <OverlayTrigger
           overlay={
-            <Tooltip id="customers-edit-tooltip">
-              {('IPay::EditCustomer')}
+            <Tooltip  style={pStyle} id="customers-edit-tooltip">
+              {('Chỉnh sử')}
             </Tooltip>
           }>
           <a
@@ -89,7 +92,7 @@ export function ActionsColumnFormatter(
       {/* {hasDeletePermission && ( */}
         <OverlayTrigger
           overlay={
-            <Tooltip id="customers-delete-tooltip">
+            <Tooltip  style={pStyle} id="customers-delete-tooltip">
               Xóa
             </Tooltip>
           }

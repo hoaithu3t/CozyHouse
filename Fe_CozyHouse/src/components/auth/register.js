@@ -3,7 +3,14 @@ import { Form, Button, Modal, Alert } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { register } from "../../api/auth";
-import { useAsync } from "react-hook-async";
+import { useAsync } from "react-hook-async"
+import FormControl from '@material-ui/core/FormControl';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { CustomerType} from '../../main/customers/CustomersUIHelpers';
+
+
 
 const SignInSchema = Yup.object().shape({
   username: Yup.string()
@@ -69,9 +76,31 @@ const Register = (props) => {
           </Modal.Title>
           </Modal.Header>
     <Modal.Body>
+      
         <Form className="m-4 text-center" onSubmit={formik.handleSubmit}>
 
           {/* họ tên */}
+          <FormControl component="fieldset">
+                  <RadioGroup
+                    aria-label="position"
+                    name="role"
+                    value={formik.values.role}
+                    onChange={formik.handleChange}
+                    row>
+                    <FormControlLabel
+                      value={CustomerType.Renter.toString()}
+                      control={<Radio />}
+                      label= "Người thuê"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value={CustomerType.Owner.toString()}
+                      control={<Radio />}
+                      label= "Chủ trọ"
+                      labelPlacement="end"
+                    />
+                  </RadioGroup>
+                </FormControl>
           <Form.Group controlId="formBasicUsername" className="text-left">
             <Form.Label>Họ tên</Form.Label>
             <Form.Control
