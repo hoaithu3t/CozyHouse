@@ -1,0 +1,43 @@
+[
+    {
+        "id": 1,
+        "title": "Pent House",
+        "location": "Cau Giay",
+        "price":12000000,
+        "area": 32,
+        "number_of_room": 2
+    },
+    {
+        "id": 2,
+        "title": " House",
+        "location": "Cau Giay",
+        "price":2000000,
+        "area": 60,
+        "number_of_room": 2
+    },
+    {
+        "id": 3,
+        "title": "Penthouse",
+        "location": "Cau Giay",
+        "price":45000000,
+        "area": 43,
+        "number_of_room": 2
+    },
+    {
+        "id": 4,
+        "title": "homestay",
+        "location": "Cau Giay",
+        "price":23000000,
+        "area": 12,
+        "number_of_room": 2
+    },
+    {
+        "id": 5,
+        "title": "Hotel",
+        "location": "Cau Giay",
+        "price":32000000,
+        "area": 54,
+        "number_of_room": 2
+    }
+    
+]
