@@ -163,6 +163,13 @@ code {
   font-size: 16px;
   transform: translateY(5px);
 }
+.person {
+  color: white;
+  margin: 5px;
+  font-size: 16px;
+  transform: translateY(5px);
+}
+
 .font {
   font-size: 16px;
 }
@@ -272,4 +279,10 @@ button:focus {
 .status {
   display: flex;
 }
-
+.edit_button {
+  color: blue;
+}
+.approve_customer {
+  margin-bottom: 5px;
+  border-color : #f38e9c;
+}

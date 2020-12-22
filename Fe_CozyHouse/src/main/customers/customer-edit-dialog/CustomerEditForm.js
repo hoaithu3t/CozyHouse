@@ -247,7 +247,7 @@ export function CustomerEditForm({
                 {/*Mật khẩu*/}
                   <div className="col-lg-6">
                     <Field
-                      name="passWord"
+                      name="password"
                       component={Input}
                       placeholder="Mật khẩu"
                       label={

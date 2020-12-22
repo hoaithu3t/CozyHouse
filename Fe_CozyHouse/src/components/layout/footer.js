@@ -25,9 +25,9 @@ const Footer = () => {
       <div className="founder">
         <h4>Our Team</h4>
         <ul>
-          <li className="b">Võ Lương Bằng</li>
-          <li>Lưu Thị Hoài Thu</li>
-          <li className="v">Đỗ Ngọc Thanh Vân</li>
+          <li className="b"><i class="material-icons icon person">person</i> Võ Lương Bằng</li>
+          <li className= "t"><i class="material-icons icon person">person</i> Lưu Thị Hoài Thu</li>
+          <li className="v"><i class="material-icons icon person">person</i> Đỗ Ngọc Thanh Vân</li>
         </ul>
       </div>
       <div className="contact">
