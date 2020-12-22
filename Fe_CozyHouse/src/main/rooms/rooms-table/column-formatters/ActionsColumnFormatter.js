@@ -79,11 +79,7 @@ export function ActionsColumnFormatter(
           <a
             className="btn btn-icon btn-light btn-hover-primary btn-sm ml-3"
             onClick={() => openEditRoomDialog(row._id)}>
-            <span className="svg-icon svg-icon-md svg-icon-primary">
-              <SVG
-                src={toAbsoluteUrl('/media/svg/icons/Communication/Write.svg')}
-              />
-            </span>
+            <i class=" edit_button fas fa-edit"></i>
           </a>
         </OverlayTrigger>
       {/* )} */}
