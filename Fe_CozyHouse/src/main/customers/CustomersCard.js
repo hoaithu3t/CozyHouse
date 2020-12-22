@@ -33,7 +33,7 @@ export function CustomersCard() {
               type="button"
               className="btn btn-primary"
               onClick={customersUIProps.newCustomerButtonClick}>
-              {"NewCustomer"}
+              Tạo mới khách hàng
             </button>
           {/* )} */}
         </CardHeaderToolbar>

@@ -72,5 +72,5 @@ setCardSchema.methods.generateSlug = function () {
     id.slice(-6);
 };
 
-const SetCard = mongoose.model("Question", setCardSchema);
+const SetCard = mongoose.model("SetCard", setCardSchema);
 module.exports = { SetCard, setCardSchema };

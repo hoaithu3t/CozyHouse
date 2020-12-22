@@ -11,6 +11,7 @@ import Setting from "./components/setting";
 import Profile from "./components/setting/profile";
 import Auth from "./components/auth/index";
 import Customer from "./main/customers/Customers"
+import Rooms from "./main/rooms/Rooms"
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -20,7 +21,7 @@ function App() {
     if (!authUser) {
       const jwt = localStorage.getItem("jwt");
       const ss = localStorage.getItem("session");
-      debugger;
+      // debugger;
       if (jwt !== null && jwt) {
         console.log("here" + jwt + "1");
         fetchProfile(jwt).then((user) => setAuthUser(user));
@@ -49,6 +50,7 @@ function App() {
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
           <Route path="/customer" component={Customer} />
+          <Route path="/rooms" component={Rooms} />
         </Switch>
       </div>
     </AuthContext.Provider>

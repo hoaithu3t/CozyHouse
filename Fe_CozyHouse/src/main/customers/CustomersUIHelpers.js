@@ -1,10 +1,7 @@
 export const CustomerStatusCssClasses = ['danger', 'success', 'info', ''];
 export const CustomerStatusTitles = ['Suspended', 'Active', 'Pending', ''];
 export const CustomerTypeCssClasses = ['success', 'primary', ''];
-export const Gender = {
-  Male : 0,
-  Female : 1,
-}
+
 export const CustomerStatus = {
   NotApprove : 0,
   Approved : 1,
@@ -12,7 +9,7 @@ export const CustomerStatus = {
 }
 export const CustomerType = {
   Owner : 0,
-  Renter : 1,
+  Renter : 1
 }
 export const defaultSorted = [{ dataField: 'id', order: 'asc' }];
 export const sizePerPageList = [
@@ -33,19 +30,17 @@ export const initialFilter = {
 };
 
 export const initCustomer = {
-  id: undefined,
-  name: '',
-  email: '',
-  phone: '',
-  gender: 0,
-  birthDate: '',
-  address: '',
-  socialIdOrBusinessLicense: '',
-  bankAccount: '',
-  branchId: '', // bank branch Id
-  customerType: CustomerType.Renter,
-  taxCode: '',
-  legalRepresentative: '',
-  activeTime: '',
-  beneficiaryName: '',
+  username: '',//oke
+  password:'',
+  CMND: '',
+  address: '', //oke
+  phone: '',//oke
+  email: '', //oke
+  birthDate: null,
+  gender: null, //oke
+  role: CustomerType.Renter,//oke
+  status: '', 
+  reasonReject: '',
+  photoUrl: '',
+  roomsLike: null
 };

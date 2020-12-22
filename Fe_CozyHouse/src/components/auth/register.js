@@ -142,8 +142,8 @@ const Register = (props) => {
               type="text"
               onChange={formik.handleChange}
               name="email"
-              value={formik.values.username}
-              isInvalid={formik.errors.username}
+              value={formik.values.email}
+              isInvalid={formik.errors.email}
               placeholder="Nhập email"
             />
             <Form.Control.Feedback type="invalid">

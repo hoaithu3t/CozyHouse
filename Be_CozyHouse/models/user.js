@@ -25,7 +25,8 @@ const userSchema = mongoose.Schema(
     role: Number,
     status: Number,
     reasonReject : String,
-    photoUrl: String
+    photoUrl: String,
+    roomsLike: [String],
   },
   {
     timestamps: true,

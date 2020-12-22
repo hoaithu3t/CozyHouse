@@ -1,118 +1,114 @@
-import * as requestFromServer from './paymentsCrud';
-import { paymentsSlice, callTypes } from './paymentsSlice';
-import moment from 'moment-timezone';
+import * as requestFromServer from './roomsCrud';
+import { roomsSlice, callTypes } from './roomsSlice';
+// import moment from 'moment-timezone';
 
-const { actions } = paymentsSlice;
+const { actions } = roomsSlice;
 
-export const fetchAllPayments = () => (dispatch) => {
+export const fetchAllRooms = (queryParams, token) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .getAllPayments()
+    .getAllRooms(token)
     .then((response) => {
-      const allPayments = response.data;
-      dispatch(actions.allPaymentsFetched({ allPayments }));
+      const allRooms = response.data;
+      dispatch(actions.allRoomsFetched({ allRooms }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find payments";
+      error.clientMessage = "Can't find rooms";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchPayments = (queryParams) => (dispatch) => {
+export const fetchRooms = (queryParams) => (dispatch) => {
   const newParams = {
     filterName: queryParams.filter.name,
     filterFromDate: queryParams.filter.fromDate,
     filterToDate: queryParams.filter.toDate,
-    filterPaymentStatus: queryParams.filter.paymentStatus,
+    filterRoomStatus: queryParams.filter.roomStatus,
     sorting: `${queryParams.sortField} ${queryParams.sortOrder}`,
     skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
     maxResultCount: queryParams.pageSize,
   };
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findPayments(newParams)
+    .findRooms(newParams)
     .then((response) => {
       const { totalCount, items } = response.data;
-      items.forEach((item) => {
-        item.amendmentTime = moment
-          .tz(item.amendmentTime, 'ETC/GMT+0')
-          .toDate();
-      });
-      dispatch(actions.paymentsFetched({ totalCount, entities: items }));
+      
+      dispatch(actions.roomsFetched({ totalCount, entities: items }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find payments";
+      error.clientMessage = "Can't find rooms";
       dispatch(actions.catchError({ error, callType: callTypes.list }));
     });
 };
 
-export const fetchPayment = (id) => (dispatch) => {
+export const fetchRoom = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.paymentFetched({ paymentForEdit: undefined }));
+    return dispatch(actions.roomFetched({ roomForEdit: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getPaymentById(id)
+    .getRoomById(id)
     .then((response) => {
-      const payment = response.data;
-      dispatch(actions.paymentFetched({ paymentForEdit: payment }));
+      const room = response.data;
+      dispatch(actions.roomFetched({ roomForEdit: room }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find payment";
+      error.clientMessage = "Can't find room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const getPaymentDetails = (id) => (dispatch) => {
+export const getRoomDetails = (id) => (dispatch) => {
   if (!id) {
-    return dispatch(actions.getPaymentFetched({ paymentDetail: undefined }));
+    return dispatch(actions.getRoomFetched({ roomDetail: undefined }));
   }
 
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .getPaymentById(id)
+    .getRoomById(id)
     .then((response) => {
-      const payment = response.data;
-      dispatch(actions.getPaymentFetched({ paymentDetail: payment }));
+      const room = response.data;
+      dispatch(actions.getRoomFetched({ roomDetail: room }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't find payment";
+      error.clientMessage = "Can't find room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePayment = (id) => (dispatch) => {
+export const deleteRoom = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePayment(id)
+    .deleteRoom(id)
     .then(() => {
-      dispatch(actions.paymentDeleted({ id }));
+      dispatch(actions.roomDeleted({ id }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete payment";
+      error.clientMessage = "Can't delete room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const approvePayment = (id) => (dispatch) => {
+export const approveRoom = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .approvePayment(id)
+    .approveRoom(id)
     .then(() => {
-      dispatch(actions.paymentAppove({ id }));
+      dispatch(actions.roomAppove({ id }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't approve payment";
+      error.clientMessage = "Can't approve room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
-export const rejectPayment = (id, reason) => (dispatch) => {
+export const rejectRoom = (id, reason) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .rejectPayment(id, reason)
+    .rejectRoom(id, reason)
     .then(() => {
-      dispatch(actions.paymentReject({ id }));
+      dispatch(actions.roomReject({ id }));
     })
     .catch((error) => {
       error.clientMessage = "Can't reject customer";
@@ -120,68 +116,68 @@ export const rejectPayment = (id, reason) => (dispatch) => {
     });
 };
 
-export const approvePayments = (ids) => (dispatch) => {
+export const approveRooms = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .approvePayments(ids)
+    .approveRooms(ids)
     .then(() => {
-      dispatch(actions.paymentsApproved({ ids }));
+      dispatch(actions.roomsApproved({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't approve payments";
+      error.clientMessage = "Can't approve rooms";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const createPayment = (paymentForCreation) => (dispatch) => {
+export const createRoom = (roomForCreation, authToken) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .createPayment(paymentForCreation)
+    .createRoom(roomForCreation, authToken)
     .then((response) => {
-      const payment = response.data;
-      dispatch(actions.paymentCreated({ payment }));
+      const room = response.data;
+      dispatch(actions.roomCreated({ room }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't create payment";
+      error.clientMessage = "Can't create room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePayment = (payment) => (dispatch) => {
+export const updateRoom = (room) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updatePayment(payment)
+    .updateRoom(room)
     .then(() => {
-      dispatch(actions.paymentUpdated({ payment }));
+      dispatch(actions.roomUpdated({ room }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update payment";
+      error.clientMessage = "Can't update room";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const updatePaymentsStatus = (ids, status) => (dispatch) => {
+export const updateRoomsStatus = (ids, status) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .updateStatusForPayments(ids, status)
+    .updateStatusForRooms(ids, status)
     .then(() => {
-      dispatch(actions.paymentsStatusUpdated({ ids, status }));
+      dispatch(actions.roomsStatusUpdated({ ids, status }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't update payments status";
+      error.clientMessage = "Can't update rooms status";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };
 
-export const deletePayments = (ids) => (dispatch) => {
+export const deleteRooms = (ids) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
-    .deletePayments(ids)
+    .deleteRooms(ids)
     .then(() => {
-      dispatch(actions.paymentsDeleted({ ids }));
+      dispatch(actions.roomsDeleted({ ids }));
     })
     .catch((error) => {
-      error.clientMessage = "Can't delete payments";
+      error.clientMessage = "Can't delete rooms";
       dispatch(actions.catchError({ error, callType: callTypes.action }));
     });
 };

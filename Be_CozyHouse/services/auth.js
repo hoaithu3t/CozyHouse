@@ -6,7 +6,7 @@ const {
   StatusCustomer
 } = require("../public/customer");
 
-const register = async (username, CMND, address, phone, email, password, role, gender, dateOfBirth ) => {
+const register = async ({ username, CMND, address, phone, email, password, role, gender, dateOfBirth } ) => {
   const user = await User.findOne({ username });
   const status = StatusCustomer.NotApprove;
   if (user) throw new Error(ERROR.USERNAME_EXISTED);

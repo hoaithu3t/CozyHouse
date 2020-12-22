@@ -8,7 +8,7 @@ const {
 const ERROR = require("../types/error");
 
 router.post("/register", (req, res) => { 
-  register(req.body )
+  register(req.body)
     .then((result) => {
       res.json({ success: true, result: result });
     })
