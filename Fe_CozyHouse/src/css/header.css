@@ -54,3 +54,18 @@ Form {
   font-weight: 400;
   font-size: 26px;
 }
+.button_add {
+  color: #f695a0 !important;
+  border-color: #f695a0 !important;
+  background-color: white !important;
+  float: right;
+}
+
+.header-card {
+  margin-top: 24px !important;
+  opacity: 70% !important;
+}
+.plus_button {
+  margin-left: 5px;
+}
+

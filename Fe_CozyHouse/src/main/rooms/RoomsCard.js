@@ -25,15 +25,20 @@ export function RoomsCard() {
 
   return (
     <Card>
-      <CardHeader title= "Danh sách phòng">
+      <CardHeader classname= "cardHeader"><h2 className="header-card">Danh sách phòng</h2>
         <CardHeaderToolbar>
           {/* {hasCreatePermission && ( */}
-            <button
+            <span className="button_add " >
+            <button 
               type="button"
-              className="btn btn-primary"
+              className="btn button_add"
+              // style = {{color: "#f695a0"}}
               onClick={roomsUIProps.newRoomButtonClick}>
-              Tạo phòng mới
+              Tạo phòng mới    
+               <span ><i class="plus_button fas fa-plus-circle"></i></span>
             </button>
+           
+            </span>
           {/* )} */}
         </CardHeaderToolbar>
       </CardHeader>

@@ -131,7 +131,7 @@ const Header = () => {
         ) : (
             <>
           <Avatar size="xl" src={authUser.user.photoUrl} />
-              <span>{authUser.user.username}</span>
+              
               </>
         )}
         <Login 

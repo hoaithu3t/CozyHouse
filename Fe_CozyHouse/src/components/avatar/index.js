@@ -44,7 +44,16 @@ const Avatar = ({ size, src }) => {
             Setting
           </Link>
           <Link to="/profile" className="p-2 io">
-            <i class="material-icons icon">person</i> Profile
+            <i class="material-icons icon">person</i> 
+            Profile
+          </Link>
+          <Link to="/customer" className="p-2 io">
+          <i class="fas fa-user-friends material-icons icon"></i>
+          Customer
+          </Link>
+          <Link to="/rooms" className="p-2 io">
+          <i class="fas fa-house-user material-icons icon"></i>
+          Rooms
           </Link>
           <a
             href="https://www.facebook.com/groups/441154729911930/"
