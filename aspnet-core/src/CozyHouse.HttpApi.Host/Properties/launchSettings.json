@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44306",
-      "sslPort": 44306
+      "applicationUrl": "https://localhost:44398",
+      "sslPort": 44398
     }
   },
   "profiles": {
@@ -18,7 +18,7 @@
     "CozyHouse.HttpApi.Host": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44306",
+      "applicationUrl": "https://localhost:44398",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

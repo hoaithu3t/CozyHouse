@@ -1,20 +1,27 @@
 .inp-search {
   padding: 0px 10px !important;
-  border-radius: 20px !important;
+  border-radius: 40px !important;
   border: none !important;
   color: black !important;
+  /* position: absolute !important; */
+  width: 382px !important;
+  height: 45px !important;
 }
+
 .inp-search::placeholder {
   color: #cacaca !important;
+  width: 382px;
 }
 .bnt-search {
   padding: 1px !important;
   border-radius: 50% !important;
   border: 2px solid white !important;
-  background-color: transparent !important;
+  background-color: #f695a0 !important;
   transform: translateY(3px) !important;
-  margin-left: 10px !important;
-  margin-bottom: 5px !important;
+
+  position: absolute;
+  right: 22px;
+  top: 1px;
 }
 .bnt-search i {
   color: white !important;
@@ -22,3 +29,28 @@
   padding: 1px !important;
 }
 
+.pb-2 {
+  /* position: relative; */
+  width: 215px;
+  margin-left: 271px;
+}
+
+Form {
+  width: 400px !important;
+  position: relative;
+  left: 181px;
+}
+
+.login {
+  margin-right: 10px;
+  font-weight: 400;
+  font-size: 26px;
+}
+
+.register {
+  border: 2px solid white;
+  padding: 0px 17px 4px 17px;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 26px;
+}

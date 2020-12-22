@@ -1,20 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-import withAuth from "../../hoc/authHoc";
-import SetItem from "./setItem";
-import authCtx from "../../contexts/auth";
-import ReactLoading from "react-loading";
-import { useAsync } from "react-hook-async";
-import { getAllSetCard } from "../../api/flashcard";
+// import { Link } from "react-router-dom";
+// import withAuth from "../../hoc/authHoc";
+// import authCtx from "../../contexts/auth";
+// import ReactLoading from "react-loading";
+// import { useAsync } from "react-hook-async";
 // import "../../scss/dashboard.scss";
 import cover from "./cover.png";
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 
-const style = {
-  fontSize: "24px",
-  color: "lightPink",
-  margin: "10px",
-};
+// const style = {
+//   fontSize: "24px",
+//   color: "lightPink",
+//   margin: "10px",
+// };
 // linear-gradient(96.98deg, #DB647E 0%, #FDA2A9 100%)
 const Dashboard = () => {
   return (

@@ -71,19 +71,19 @@ const Header = () => {
           </b>
         </Navbar.Brand>
         
-        <div>
+        <div >
           <div className = "pb-2 pt-0">
-          <b className="m-4 pointer">
-            <img src={iconHeart} />
-          </b>
-          <b className="m-4 pointer">
-            <img src={iconMess} />
-          </b>
-          <b className="m-4 pointer">
-            <img src={notification} />
-          </b>
+            <b className="m-4 pointer">
+              <img src={iconHeart} />
+            </b>
+            <b className="m-4 pointer">
+              <img src={iconMess} />
+            </b>
+            <b className="m-4 pointer">
+              <img src={notification} />
+            </b>
           </div>
-          <div>
+        <div>
         <Form inline>
           {(
             <FormControl
@@ -114,7 +114,7 @@ const Header = () => {
             onClick={() => {
               setModalShowLogin(true);
             }}
-            className=" pointer"
+            className="login pointer"
           >
             Đăng nhập
           </span>
@@ -122,14 +122,17 @@ const Header = () => {
           onClick={() => {
             setModalShowRegister(true);
           }}
-          className=" pointer"
+          className="register pointer"
         >
           Đăng ký
         </span>
 
         </div>
         ) : (
+            <>
           <Avatar size="xl" src={authUser.user.photoUrl} />
+              <span>{authUser.user.username}</span>
+              </>
         )}
         <Login 
             show = {modalShowLogin} 
@@ -147,9 +150,6 @@ const Header = () => {
               }
             } 
             onHide = {() => {setModalShowRegister(false)}}/>
-        
-        {/* <AuthModal show={modalShowRegister || modalShowLogin} haveAccount = {haveAccount} 
-        onHide={() =>modalShowLogin ? setModalShowLogin(false) : setModalShowRegister(false)} /> */}
 
       </Navbar>
     </>

@@ -1,0 +1,55 @@
+.facebookIcon {
+  width: 20px;
+}
+.instagramIcon {
+  width: 20px;
+}
+.youtubeIcon {
+  width: 20px;
+}
+
+.locationPin {
+  width: 30px;
+}
+.footer {
+  display: flex;
+}
+
+.footer .box {
+  flex-basis: 50%;
+  padding: 10px 20px;
+}
+
+.box h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.box .content {
+  margin: 20px 0 0 0;
+}
+.social {
+  display: flex;
+  flex-direction: column;
+}
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  text-decoration-color: black;
+}
+
+p {
+  padding-left: 35px;
+}
+
+.v {
+  padding-left: 24px;
+}
+
+.b {
+    margin-right: 13px;
+}
