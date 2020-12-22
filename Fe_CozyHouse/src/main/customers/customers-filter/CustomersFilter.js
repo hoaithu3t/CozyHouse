@@ -62,13 +62,13 @@ export function CustomersFilter() {
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
-            <div className="form-group row">
-              <div className="col-lg-2">
+            <div className="form-group row m-5">
+              <div className="col-lg-3">
                 <input
                   type="text"
                   className="form-control"
                   name="searchText"
-                  placeholder={'IPay::Search'}
+                  placeholder="Tên"
                   onBlur={handleBlur}
                   value={values.searchText}
                   onChange={(e) => {
@@ -77,16 +77,16 @@ export function CustomersFilter() {
                   }}
                 />
                 <small className="form-text text-muted">
-                  <b>{'IPay::SearchByName'}</b>
+                  <b>Tìm kiếm theo tên</b>
                 </small>
               </div>
 
-              <div className="col-lg-2">
+              <div className="col-lg-3">
                 <input
                   type="text"
                   className="form-control"
                   name="email"
-                  placeholder={'IPay::Search'}
+                  placeholder="Email"
                   onBlur={handleBlur}
                   value={values.email}
                   onChange={(e) => {
@@ -95,7 +95,7 @@ export function CustomersFilter() {
                   }}
                 />
                 <small className="form-text text-muted">
-                  <b>{'IPay::SearchByEmail'}</b>
+                  <b>Tìm kiếm theo email</b>
                 </small>
               </div>
             </div>

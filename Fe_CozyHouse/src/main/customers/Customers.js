@@ -126,14 +126,14 @@ export default function Customers({ history }) {
           />
         )}
       </Route>
-      <Route path="/customer/:id/r6eject">
+      <Route path="/customer/:id/reject">
         {({ history, match }) => (
           <CustomerRejectDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              // history.location.state &&
-              //   dispatch(actions.fetchCustomers(history.location.state));
+              history.location.state &&
+                dispatch(actions.fetchCustomers(history.location.state));
               history.push('/customer');
             }}
           />

@@ -21,10 +21,8 @@ router.get("/", (req, res) => {
 });
 
 router.get("/find", (req, res) => {
-  
-  // const { customerStatus, userName, email } = req.params;
-  getCustomers().then((customers) => {
-    res.json(customers);
+    getCustomers(req.query).then((result) => {
+    res.json(result);
   });
 });
 

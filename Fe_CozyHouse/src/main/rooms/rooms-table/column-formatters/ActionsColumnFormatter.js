@@ -58,7 +58,7 @@ export function ActionsColumnFormatter(
         {/* )} */}
       <OverlayTrigger
         overlay={
-          <Tooltip id="rooms-detail-tooltip">
+          <Tooltip id="rooms-detail-tooltip" className = "d-flex">
             Xem chi tiết
           </Tooltip>
         }>

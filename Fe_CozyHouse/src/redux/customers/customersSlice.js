@@ -57,7 +57,7 @@ export const customersSlice = createSlice({
     },
     // findCustomers
     customersFetched: (state, action) => {
-      const { totalCount, entities } = action.payload;
+      const {entities, totalCount } = action.payload;
       state.listLoading = false;
       state.error = null;
       state.entities = entities;
@@ -74,7 +74,7 @@ export const customersSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.map((entity) => {
-        if (entity.id === action.payload.customer.id) {
+        if (entity._id === action.payload.customer._id) {
           return action.payload.customer;
         }
         return entity;
@@ -90,7 +90,7 @@ export const customersSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => !action.payload.ids.includes(el.id),
+        (el) => !action.payload._ids.includes(el._id),
       );
     },
     // deleteCustomer
@@ -98,7 +98,7 @@ export const customersSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => el.id !== action.payload.id,
+        (el) => el._id !== action.payload._id,
       );
     },
     // deleteCustomers
@@ -106,7 +106,7 @@ export const customersSlice = createSlice({
       state.error = null;
       state.actionsLoading = false;
       state.entities = state.entities.filter(
-        (el) => !action.payload.ids.includes(el.id),
+        (el) => !action.payload._ids.includes(el._id),
       );
     },
     // rejectCustomer
@@ -120,7 +120,7 @@ export const customersSlice = createSlice({
       state.error = null;
       const { ids, status } = action.payload;
       state.entities = state.entities.map((entity) => {
-        if (ids.findIndex((id) => id === entity.id) > -1) {
+        if (ids.findIndex((id) => id === entity._id) > -1) {
           entity.status = status;
         }
         return entity;

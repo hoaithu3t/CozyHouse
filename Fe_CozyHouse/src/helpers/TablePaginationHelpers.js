@@ -6,7 +6,7 @@ export const getPagesCount = (totalSize, sizePerPage) => {
 };
 
 export const getPages = (page, pagesCount, paginationSize) => {
-  const result: number[] = [];
+  const result = [];
   if (!page) {
     return result;
   }

@@ -84,7 +84,7 @@ const Header = () => {
             </b>
           </div>
         <div>
-        <Form inline>
+        <Form inline className = "formRegister">
           {(
             <FormControl
               type="text"
@@ -131,7 +131,6 @@ const Header = () => {
         ) : (
             <>
           <Avatar size="xl" src={authUser.user.photoUrl} />
-              
               </>
         )}
         <Login 

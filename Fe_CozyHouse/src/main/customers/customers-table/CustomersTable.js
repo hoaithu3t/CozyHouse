@@ -67,8 +67,7 @@ export function CustomersTable() {
   const dispatch = useDispatch();
   useEffect(() => {
     // clear selections list
-    customersUIProps.setIds([]);
-    dispatch(actions.fetchAllCustomers(customersUIProps.queryParams));
+    dispatch(actions.fetchCustomers(customersUIProps.queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [customersUIProps.queryParams, dispatch]);
 
@@ -88,13 +87,6 @@ export function CustomersTable() {
       sortCaret: sortCaret,
     },
     {
-      dataField: 'address',
-      text: "Địa chỉ",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
-    },
-    {
       dataField: 'email',
       text: "Email",
       sort: true,
@@ -104,12 +96,12 @@ export function CustomersTable() {
     {
       dataField: 'phone',
       text: "Số điện thoại",
-      sort: true,
+      sort: false,
       sortCaret: sortCaret,
       headerSortingClasses,
     },
     {
-      dataField: 'customerStatus',
+      dataField: 'status',
       text: "Trạng thái",
       sort: false,
       formatter: columnFormatters.StatusCustomerColumnFormatter,

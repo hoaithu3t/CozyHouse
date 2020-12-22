@@ -63,6 +63,7 @@ export function CustomerEditForm({
                   <div className="spinner spinner-lg spinner-success" />
                 </div>
               )}
+              {customer && console.log(customer)}
               <Form className="form form-label-right">
                {/* chủ trọ và người thuê */}
                 <FormControl component="fieldset">
@@ -80,6 +81,7 @@ export function CustomerEditForm({
                         );
                       }
                     }}
+                    disabled = {disabled}
                     row>
                     <FormControlLabel
                       value={CustomerType.Renter}
@@ -259,20 +261,11 @@ export function CustomerEditForm({
                       type = "password"
                       withFeedbackLabel={true}
                       disabled={disabled}
-                    />
-                    {disabled &&
-                      customer.customerHistory &&
-                      customer.customerHistory.password !== customer.password && (
-                        <p className="text-warning m-2 text-smail">
-                          <span className="mr-3">
-                            Dữ liệu cũ:
-                          </span>
-                          {customer.customerHistory.password}
-                        </p>
-                      )}
+                    />                   
                   </div>
-                {/* Xác nhận mật khẩu */}
-                <div className="col-lg-6">
+                  {/* Xác nhận mật khẩu */}
+                  {!disabled && (
+                     <div className="col-lg-6">
                     <Field
                       name="confirmPassWord"
                       component={Input}
@@ -288,6 +281,8 @@ export function CustomerEditForm({
                       disabled={disabled}
                     />
                   </div>
+                  ) }
+               
                 {/* Xác nhận mật khẩu */}
                 </div>
                 {values.role === CustomerType.Owner && (

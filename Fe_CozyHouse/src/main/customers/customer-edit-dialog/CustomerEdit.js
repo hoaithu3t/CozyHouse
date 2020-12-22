@@ -37,10 +37,6 @@ export default function CustomerEdit({
   );
 
   useEffect(() => {
-    dispatch(actionsBank.fetchAllBanks());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(actionsCustomer.fetchAllCustomers());
   }, [dispatch]);
 

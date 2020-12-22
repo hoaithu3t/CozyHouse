@@ -21,7 +21,7 @@ export const fetchCustomers = (queryParams) => (dispatch) => {
   const newParams = {
     filterName: queryParams.filter.name,
     filterEmail: queryParams.filter.email,
-    filterCustomerStatus: queryParams.filter.customerStatus,
+    filterStatus: queryParams.filter.customerStatus,
     sorting: `${queryParams.sortField} ${queryParams.sortOrder}`,
     skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
     maxResultCount: queryParams.pageSize,
@@ -29,9 +29,8 @@ export const fetchCustomers = (queryParams) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .findCustomers(newParams)
-    .then((response) => {
-      const { totalCount, items } = response.data;     
-      dispatch(actions.customersFetched({ totalCount, entities: items }));
+    .then((response) => {   
+      dispatch(actions.customersFetched({totalCount: response.data.totalCount,entities: response.data.customer }));
     })
     .catch((error) => {
       error.clientMessage = "Can't find customers";
@@ -92,8 +91,8 @@ export const approveCustomer = (id) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));
   return requestFromServer
     .approveCustomer(id)
-    .then(() => {
-      dispatch(actions.customerAppove({ id }));
+    .then((res) => {
+      dispatch(actions.customerAppove({ customer: res.data }));
     })
     .catch((error) => {
       error.clientMessage = "Can't approve customer";
@@ -101,18 +100,6 @@ export const approveCustomer = (id) => (dispatch) => {
     });
 };
 
-export const approveCustomers = (ids) => (dispatch) => {
-  dispatch(actions.startCall({ callType: callTypes.action }));
-  return requestFromServer
-    .approveCustomers(ids)
-    .then(() => {
-      dispatch(actions.customersApproved({ ids }));
-    })
-    .catch((error) => {
-      error.clientMessage = "Can't approve customers";
-      dispatch(actions.catchError({ error, callType: callTypes.action }));
-    });
-};
 
 export const rejectCustomer = (id, reason) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.action }));

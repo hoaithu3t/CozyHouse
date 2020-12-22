@@ -8,7 +8,7 @@ const {
 
 const register = async ({ username, CMND, address, phone, email, password, role, gender, dateOfBirth } ) => {
   const user = await User.findOne({ username });
-  const status = StatusCustomer.NotApprove;
+  const status = 0;
   if (user) throw new Error(ERROR.USERNAME_EXISTED);
   const newUser = new User({
     username,
@@ -22,6 +22,7 @@ const register = async ({ username, CMND, address, phone, email, password, role,
     status
   });
   newUser.generatePassword(password);
+  console.log(newUser)
   return newUser.save();
 };
 

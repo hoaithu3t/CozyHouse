@@ -8,7 +8,9 @@ export function StatusCustomerColumnFormatter(cellContent, row) {
   return (
     <>
       <span>
-        {CustomerStatus[row.customerStatus]}
+        {
+          row.status == 0 ? "NotApprove" : (row.status == 1 ? "Approve" :(row.status == 2 ? "Reject" : ""))
+        }
       </span>
     </>
   );

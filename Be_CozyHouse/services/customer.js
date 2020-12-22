@@ -15,17 +15,29 @@ const getAllCustomers = async () => {
   return customer;
 };
 
-// const getCustomer = async ({ filterName, filterEmail, sorting, skipCount, maxResultCount }) => {
-const getCustomers = async () => {
-
-  const customer = await User.aggregate()
-    // .match({ username: filterName})
-    // .find({text: {$search: filterName}})
-    // .match({ username: filterName , email : filterEmail })
-    // .skip(0)
-    .limit(100)
+const getCustomers = async (filter) => {
+  const { filterName, filterEmail, skipCount, maxResultCount, filterStatus } = filter;
+  const rgx = (pattern) => new RegExp(`.*${pattern}.*`);
+  const searchRgxUserName = rgx(filterName);
+  const searchRgxEmail = rgx(filterEmail);
+  var totalCount;
+  await User.find().exec(function (err, results) {    
+    totalCount = results.length
+  });
+  var customer = await User
+    .find({
+    $or: [
+      { username: { $regex: searchRgxUserName, $options: "i" } },
+      { email: { $regex: searchRgxEmail, $options: "i" } },
+      ]
+    })
+    .skip(Number(skipCount))
+    .limit(Number(maxResultCount))
     .exec();
-  return customer;
+  if (filter.filterStatus !== undefined) {
+   customer = customer.filter(cus => cus.status === Number(filter.filterStatus))
+  }
+  return {totalCount, customer };
 };
 
 const getCustomer = async (id) => {
@@ -36,21 +48,21 @@ const getCustomer = async (id) => {
 };
 
 const updateCustomer = async (id, customer) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, { ...customer, status: StatusCustomer.NotApprove }, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, { ...customer, status: 0 }, {
     new: true,
   });
   return newCustomer;
 };
 
 const approveCustomer = async (id) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: StatusCustomer.Approve}, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: 1}, {
     new: true,
   });
   return newCustomer;
 };
 
 const rejectCustomer = async (id, reason) => {
-  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: StatusCustomer.Reject, reasonReject: reason}, {
+  const newCustomer = await User.findOneAndUpdate({ _id: id }, {status: 2, reasonReject: reason}, {
     new: true,
   });
   return newCustomer;
