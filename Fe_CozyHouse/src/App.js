@@ -9,7 +9,7 @@ import ReactLoading from "react-loading";
 import AuthContext from "./contexts/auth";
 import { useAsync } from "react-hook-async";
 import { Dashboard } from "./components/dashboard";
-// import RoomList from "./components/room_list/RoomList";
+import RoomList from "./components/room_list/RoomList";
 import {RoomsList} from "./main/rooms/room-list/RoomsList"
 import {RoomDetail} from '../src/main/rooms/room-detail/RoomDetail'
 
@@ -63,6 +63,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path ={"/:id/roomDetail"} component = {RoomDetail} />
           {/* <Route path="/room_list" component={RoomList} /> */}
+
           <Route path="/room_list" component={RoomsList} />
           <Route path="/post_detail" component={PostDetail} />
           <Route path="/customer" component={Customer} />

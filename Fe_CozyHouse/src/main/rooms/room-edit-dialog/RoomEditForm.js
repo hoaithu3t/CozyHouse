@@ -2,12 +2,14 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 // import * as actionsBank from '../../../../redux/banks/banksActions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
 import { useAsync } from "react-hook-async";
+import { toast } from 'react-toastify';
+
 import * as Yup from 'yup';
 import {
   Input,
@@ -37,7 +39,8 @@ export function RoomEditForm({
   disabled,
 }) {
 
-    const { authUser, setAuthUser } = useContext(authCtx);
+  const { authUser, setAuthUser } = useContext(authCtx);
+  const [linksImg, setLinksImg] = useState([]);
 
 
   // const hasEditPermission = usePermission('IPay.Rooms.Edit');
@@ -53,13 +56,35 @@ export function RoomEditForm({
   });
 
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
+  
   let fileInput;
   const onChooseImage = (event, setFieldValue) => {
-    if (event.target.files.length < 1) return;
-    callUploadFileApi(event.target.files[0], authUser.token).then((res) =>
-      setFieldValue("photoUrl", res.data)
-      // console.log(res.data)
-    );
+    if (event.target.files.length < 3) {
+      toast.error("Thêm tối thiểu 3 ảnh")
+      return;
+    };
+    let files = event.target.files;
+    setLinksImg(Array(files.length))
+    for (var i = 0; i < files.length; i++) {
+      // eslint-disable-next-line no-loop-func
+      callUploadFileApi(event.target.files[i], authUser.token).then((res) => {
+        var newLinksImg = linksImg;
+        newLinksImg.push(res.data)
+        setLinksImg(newLinksImg)
+        return setFieldValue(`photoUrl${i}`, res.data)
+      });
+    }
+    console.log(linksImg)
+    // files.forEach((fileImg, i) => {
+    //   callUploadFileApi(fileImg, authUser.token).then((res) => {
+    //     return setFieldValue(`photoUrl${i}`, res.data)
+    //   });
+    // })
+  
+    // callUploadFileApi(event.target.files[0], authUser.token).then((res) => {      
+    //   return setFieldValue("photoUrl", res.data)
+    // }
+    // );
   };
   
 
@@ -89,6 +114,8 @@ export function RoomEditForm({
         initialValues={room}
         validationSchema={RoomEditSchema}
         onSubmit={(values) => {
+          console.log(values)
+          values.photoUrl = linksImg;
           saveRoom(values);
         }}>
         {({ handleSubmit, values, setFieldValue }) => (
@@ -418,14 +445,26 @@ export function RoomEditForm({
                     {values.inputTimeRemain && values.timeRemain ? getRentCost(values.inputTimeRemain, values.timeRemain) : ""}
                   </div>
                 </div>
-
-          {/* <div className="form-group row ml-2">
-            <h4 className="code">Photo</h4>
+          {/* Photo */}
+          <div className="form-group row ml-2">
+                  <h4 className="code">Photo</h4>                  
+                  {
+                   
+                    linksImg.map((el, i) =>
+                    <div>
+                        <img
+                          src={process.env.REACT_APP_API_DOMAIN + "/" + el}
+                          style={{ width: "80px", height: "80px" }}
+                          className="border m-3"
+                        />
+                    </div>
+                  )
+                  }
             <div className="align-items-center">
               {uploadFileApi.loading ? (
                 "Loading ..."
-              ) : (
-                <img
+                    ) : (               
+                <span
                   src={
                     process.env.REACT_APP_API_DOMAIN +
                     "/" +
@@ -434,20 +473,24 @@ export function RoomEditForm({
                   alt=""
                   onClick={() => fileInput.click()}
                   style={{ width: "80px", height: "80px" }}
-                  className="border rounded-circle m-3"
-                />
+                  className="border m-3 material-icons md-48"
+                  >
+                  add_photo_alternate
+                </span>
               )}
               <br />
-              <FormControl
-                className="ml-3 bg-red"
+              <input
+                className="ml-3 bg-red form-control"
                 type="file"
                 hidden
+                multiple
+                // name = "photoUrl"
                 ref={(file) => (fileInput = file)}
                 accept="image/png, image/jpeg"
-                onChange={() => onChooseImage(setFieldValue)}
+                onChange={(event) => onChooseImage(event,setFieldValue)}
               />
             </div>
-            </div>    */}
+            </div>   
               </Form>
             </Modal.Body>   
 

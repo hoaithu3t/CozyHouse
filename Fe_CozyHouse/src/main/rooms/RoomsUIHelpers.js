@@ -56,4 +56,5 @@ export const initRoom = {
   otherUtility: null,
   inputTimeRemain: '',
   timeRemain: null,
+  photoUrl: '',
 };
