@@ -60,6 +60,7 @@ const Dashboard = () => {
           </div>
           <div onClick= {() => remoteToDetail()} style = {{ cursor: "pointer"}} className="col-sm-4 col-xl">
           <i class="fas fa-city"></i>
+
             Chung cư nguyên căn
           </div>
         </div>
