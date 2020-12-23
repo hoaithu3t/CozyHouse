@@ -21,11 +21,6 @@ export function RoomsList() {
     }),
     shallowEqual,
   );
-
-  console.log(roomFilter)
-
-  var RoomList 
-
   const [queryParams, setQueryParams] = useState({
     filter: {
       title: ''
