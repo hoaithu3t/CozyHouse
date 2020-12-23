@@ -284,5 +284,12 @@ button:focus {
 }
 .approve_customer {
   margin-bottom: 5px;
-  border-color : #f38e9c;
+  border-color: #f38e9c;
+}
+
+.roomlist-container {
+  display: flex;
+  flex-flow: wrap;
+  margin-left: 15%;
+  width: 70%;
 }
