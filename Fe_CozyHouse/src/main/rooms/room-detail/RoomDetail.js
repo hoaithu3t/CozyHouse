@@ -10,6 +10,7 @@ export function RoomDetail({
   },
 }) {
 
+  
     const dispatch = useDispatch();
     const { actionsLoading, roomForEdit } = useSelector(
     (state) => ({
@@ -31,21 +32,21 @@ export function RoomDetail({
   <Carousel.Item >
     <img
       className="d-block "
-      src="https://a0.muscache.com/im/pictures/b277a9ff-c847-44b5-989b-8384c0de2c32.jpg?im_w=720"
+      src= {process.env.REACT_APP_API_DOMAIN + "/" + roomForEdit?.img[0]}
       alt="First slide"
     />
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://a0.muscache.com/im/pictures/6cbb2117-7270-4f20-8629-de5978783a29.jpg?im_w=720"
+      src= {process.env.REACT_APP_API_DOMAIN + "/" + roomForEdit?.img[1]}
       alt="Third slide"
     />
   </Carousel.Item>
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://a0.muscache.com/im/pictures/15b0bfd1-cea5-481c-a64b-acf6bac1e43b.jpg?im_w=720"
+      src= {process.env.REACT_APP_API_DOMAIN + "/" + roomForEdit?.img[2]}
       alt="Third slide"
     />
   </Carousel.Item>
@@ -55,19 +56,45 @@ export function RoomDetail({
       <div className="content">
         <div className="header-content">
           <div className="post-title">
-            <h1 >Penthouse trên Đà Lạt</h1>
-            <p> 86A/381/Nguyễn Khang - 60m2 - 2 Phòng - Chung cư mini </p>
-            <p>3000000đ / tháng</p>
+            <span className="title" >{roomForEdit?.title}</span>
+            <span className="room-infor">- {roomForEdit?.area} m2 - {roomForEdit?.numberOfRoom} phòng </span>
+            <span className="nearby-place">Gần {roomForEdit?.nearbyPlace}</span>
+            <p className="price">{roomForEdit?.price}₫ / tháng</p>
+            <p className="address"> {roomForEdit?.address}</p>
           </div>
           <div className="user">
-            <img className= "avatar" src= "https://scontent.fhan5-5.fna.fbcdn.net/v/t1.0-9/126200109_2722724684647245_6075582107124202458_o.jpg?_nc_cat=101&ccb=2&_nc_sid=09cbfe&_nc_ohc=E90UoCpNlhkAX_IeJvz&_nc_ht=scontent.fhan5-5.fna&oh=a3df3dfd325537aa67201513b735f946&oe=600896A8" />
+            <i class=" far fa-user"></i> 
+            <p> {roomForEdit?.username} </p>         
           </div>
         </div>
-        <div className="main">
-          <div className= "item">
-            <i class="fas fa-money-bill-wave"></i>
-            <p> </p>
-          </div>
+        <div className="decription">
+           <p>{roomForEdit?.description}</p>
+        </div>
+        <div className="utility">
+            <div className="item">
+              <i class="fas fa-lg	 fa-snowflake"></i>
+              <p>{roomForEdit?.conditioner ? "Có" : "Không"}</p>
+            </div> 
+            <div className="item">
+             <i class="fas fa-bath fa-lg"></i>             
+             <p>{roomForEdit?.bathroom ? "Dùng chung" : "Dùng riêng"}</p>
+            </div> 
+            <div className="item">
+              <i class="fas fa-lg	 fa-snowflake"></i>
+              <p>{roomForEdit?.balcony ? "Có" : "Không"}</p>
+            </div> 
+            <div className="item">
+            <i class="fas fa-utensils fa-lg+"></i>              
+            <p>{roomForEdit?.kitchen == 0 ? "Dùng chung" :(roomForEdit?.kitchen == 1 ? "Dùng riêng" : "Không có")}</p>
+            </div>
+            <div className="item">
+              <i class="fas fa-bolt fa-lg"></i>           
+              <p>{roomForEdit?.electricWaterPrice ? "Điện nước giá dân" : "Điện nước giá kinh doanh"}</p>
+            </div>
+            <div className="item">
+              <i class="fas fa-temperature-high fa-lg"></i>           
+              <p>{roomForEdit?.electricWaterPrice ? "Có bính nóng lạnh" : "Không có bình nóng lạnh"}</p>
+            </div>
         </div>
 
 
