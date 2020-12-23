@@ -50,7 +50,7 @@ const Header = () => {
   const [searchApiData, fetchSearchSetCard] = useAsync(null, loadData);
   const history = useHistory();
   const moveToDashboard = () => {
-    history.push("/dashboard");
+    history.push("/");
   };
   // useEffect(() => {
   //   fetchSearchSetCard(value)

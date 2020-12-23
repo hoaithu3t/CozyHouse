@@ -21,6 +21,12 @@ export function getAllRooms(token) {
     }
   );
 }
+
+export function getRoomsManyView() {
+  return axios.get(`${ROOM_URL}/roomManyView`);
+}
+
+
 export function findRoomsFilter(queryParams) {
   console.log(queryParams)
   return axios.get(`${ROOM_URL}/search`, { params: queryParams });

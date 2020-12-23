@@ -1,27 +1,32 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
-// import withAuth from "../../hoc/authHoc";
-// import authCtx from "../../contexts/auth";
-// import ReactLoading from "react-loading";
-// import { useAsync } from "react-hook-async";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+
+import * as actions from '../../redux/rooms/roomsActions';
+import {RoomItem} from '../../components/room_list'
 import "../../scss/dashboard.scss";
 import "../../css/index.css";
 import cover from "./cover.png";
-import { useHistory } from "react-router-dom";
 
-// import { Container } from "react-bootstrap";
-
-// const style = {
-//   fontSize: "24px",
-//   color: "lightPink",
-//   margin: "10px",
-// };
-// linear-gradient(96.98deg, #DB647E 0%, #FDA2A9 100%)
 const Dashboard = () => {
-  const history = useHistory();
-  const remoteToDetail = () => {
-    history.push(`/room_list`);
-  }
+  const dispatch = useDispatch();
+  const {  allRooms } = useSelector(
+    (state) => ({
+      allRooms: state.rooms.allRooms,
+    }),
+    shallowEqual,
+  );
+
+ const history = useHistory()
+  const remoteToDetail = (id) => {
+    history.push(`/${id}/roomDetail`);
+  }    
+
+  useEffect(() => {
+    dispatch(actions.fetchRoomsManyView());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className = "search-home">
@@ -100,10 +105,27 @@ const Dashboard = () => {
 
         {/* Tiêu biểu */}
         <div>
-          <div className="best"><h3>Phòng được xem nhiều nhất</h3></div>
+          <div className="best">
+            <h3>Phòng được xem nhiều nhất</h3>
+          </div>
+          <div className = "row">          
           {
-            
-          }
+            allRooms && allRooms.map(room => {
+                      var {_id, address, area, numberOfRoom, price, title } = room;
+                      return (                        
+                        <RoomItem 
+                        title={title}
+                        location={address}
+                        price={price}
+                        area={area}
+                        number_of_room={numberOfRoom}
+                        onClick = {() => remoteToDetail(_id)}
+                        />
+                      )
+                    }
+                    )
+            }
+            </div>
         </div>
       
       </div>

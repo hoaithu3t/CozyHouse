@@ -29,7 +29,7 @@ const Login = (props) => {
   const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   const moveToDashBoard = () => {
-    history.push("/dashboard");
+    history.push("/");
   };
 
   const formik = useFormik({

@@ -80,7 +80,7 @@ const getListRoom = async (user) => {
 };
 
 const searchRoom = async (filter) => {
-  const { filterTitle, skipCount, maxResultCount } = filter;
+  const { filterTitle, skipCount, maxResultCount, filterAddress, filterNearbyPlace, filterPrice, filterArea } = filter;
    var totalCount;
   await Room.find().exec(function (err, results) {    
     totalCount = results.length
@@ -89,16 +89,26 @@ const searchRoom = async (filter) => {
     .find({
        $and: [
         { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
+        { address: { $regex: new RegExp(`.*${filterAddress}.*`), $options: "i" } },
+        { nearbyPlace: { $regex: new RegExp(`.*${filterNearbyPlace}.*`), $options: "i" } },
+        // { price: { $regex: new RegExp(`.*${filterPrice}.*`), $options: "i" } },
+        // { area: { $regex: new RegExp(`.*${filterArea}.*`), $options: "i" } },
         //  { expired: false }
          // chưa chỉnh hạn đăng bai
       ]
     })  
-    .skip(Number(skipCount))
-    .limit(Number(maxResultCount))
+    // .skip(Number(skipCount))
+    // .limit(Number(maxResultCount))
     .exec();
   return { totalCount, room };
 };
 
+const getRoomManyView = async() => {
+    const room = await Room.find()
+    .limit(8)
+    .exec();
+  return room;
+}
 
 const getRoom = async (id) => {
   const room = await Room.findOne({
@@ -167,6 +177,7 @@ module.exports = {
   getDetailRoom,
   changeAvailabilityRoom,
   reportRoom,
+  getRoomManyView,
   searchRoom,
   findRoom
 };

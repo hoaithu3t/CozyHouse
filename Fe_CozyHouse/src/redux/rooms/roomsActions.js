@@ -18,6 +18,20 @@ export const fetchAllRooms = (token) => (dispatch) => {
     });
 };
 
+export const fetchRoomsManyView = () => (dispatch) => {
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .getRoomsManyView()
+   .then((response) => {
+     const allRooms = response.data;
+      dispatch(actions.allRoomsFetched({ allRooms }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't find rooms";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
 export const fetchRooms = (queryParams, token) => (dispatch) => {
   const newParams = {
     filterTitle: queryParams.filter.title,
@@ -43,10 +57,15 @@ export const fetchRooms = (queryParams, token) => (dispatch) => {
 export const fetchRoomsFilter = (queryParams) => (dispatch) => {
   const newParams = {
     filterTitle: queryParams.filter.title,
+    filterAddress: queryParams.filter.address,
+    filterNearbyPlace: queryParams.filter.nearbyPlace,
+    filterPrice: queryParams.filter.price,
+    filterArea: queryParams.filter.area,
     filterRoomStatus: queryParams.filter.roomStatus,
     skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
     maxResultCount: queryParams.pageSize,
   };
+  console.log(newParams)
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .findRoomsFilter(newParams)

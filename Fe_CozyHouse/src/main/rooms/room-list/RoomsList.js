@@ -23,7 +23,11 @@ export function RoomsList() {
   );
   const [queryParams, setQueryParams] = useState({
     filter: {
-      title: ''
+      title: '',
+      address: '',
+      nearbyPlace: '',
+      price: '',
+      area: ''
     },
     sortOrder: 'ASC', // ASC|DESC
     sortField: 'Name',
@@ -39,7 +43,7 @@ export function RoomsList() {
   }, [queryParams]);
 
   const prepareFilter = (queryParams, values) => {
-    const { title } = values;
+    const { title, address, nearbyPlace, price, area } = values;
     const newQueryParams = { ...queryParams };
     const filter = {};
 
@@ -52,6 +56,17 @@ export function RoomsList() {
     else {
       filter.title = "";
     }
+    if (address) {
+      filter.address = address;
+    } 
+    else {
+      filter.address = "";
+    }
+
+    filter.address = address  ? address : "";
+    filter.nearbyPlace = nearbyPlace ? nearbyPlace : "";
+    filter.price = price ? price : "";
+    filter.area = address ? area : "";
     newQueryParams.filter = filter;
     return newQueryParams;
   };
@@ -75,7 +90,11 @@ export function RoomsList() {
       {/* filter */}    
        <Formik
         initialValues={{
-          title: ''
+          title: '',
+          address: '',
+          nearbyPlace: '',
+          price: '',
+          area: ''
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -88,6 +107,7 @@ export function RoomsList() {
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row m-5">
+              {/* title */}
               <div className="col-lg-4">
                 <input
                   type="text"
@@ -105,6 +125,100 @@ export function RoomsList() {
                   <b>Tìm kiếm theo tiêu đề</b>
                 </small>
               </div>
+
+              {/* address */}
+               <div className="col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="address"
+                  placeholder= "Địa chỉ"
+                  onBlur={handleBlur}
+                  value={values.address}
+                  onChange={(e) => {
+                    setFieldValue('address', e.target.value);
+                    handleSubmit();
+                  }}
+                />
+                <small className="form-text text-muted">
+                  <b>Tìm kiếm theo địa chỉ</b>
+                </small>
+              </div>
+              {/* nearbyPlace */}
+              <div className="col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="nearbyPlace"
+                  placeholder= "Điểm công cộng"
+                  onBlur={handleBlur}
+                  value={values.nearbyPlace}
+                  onChange={(e) => {
+                    setFieldValue('nearbyPlace', e.target.value);
+                    handleSubmit();
+                  }}
+                />
+                <small className="form-text text-muted">
+                  <b>Tìm kiếm theo điểm dông cộng</b>
+                </small>
+              </div>
+
+              {/* price
+              <div className="col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="price"
+                  placeholder= "Giá phòng"
+                  onBlur={handleBlur}
+                  value={values.price}
+                  onChange={(e) => {
+                    setFieldValue('price', e.target.value);
+                    handleSubmit();
+                  }}
+                />
+                <small className="form-text text-muted">
+                  <b>Tìm kiếm theo giá phòng</b>
+                </small>
+              </div> */}
+
+              {/* typeOfRoom */}            
+              {/* <div className="col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="typeOfRoom"
+                  placeholder= "Kiểu phòng"
+                  onBlur={handleBlur}
+                  value={values.typeOfRoom}
+                  onChange={(e) => {
+                    setFieldValue('typeOfRoom', e.target.value);
+                    handleSubmit();
+                  }}
+                />
+                <small className="form-text text-muted">
+                  <b>Tìm kiếm theo kiểu phòng</b>
+                </small>
+              </div> */}
+
+              {/* area */}
+              {/* <div className="col-lg-4">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="area"
+                  placeholder= "Tiêu đề"
+                  onBlur={handleBlur}
+                  value={values.area}
+                  onChange={(e) => {
+                    setFieldValue('area', e.target.value);
+                    handleSubmit();
+                  }}
+                />
+                <small className="form-text text-muted">
+                  <b>Tìm kiếm theo diện tích</b>
+                </small>
+              </div> */}
              
             </div>
           </form>

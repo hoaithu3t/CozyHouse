@@ -10,6 +10,7 @@ const {
   rejectRoom,
   changeAvailabilityRoom,
   reportRoom,
+  getRoomManyView,
   searchRoom,
   findRoom,
 } = require("../services/room");
@@ -22,6 +23,12 @@ router.post("/", authMdw(), (req, res) => {
 
 router.get("/", authMdw({ optional: false }), (req, res) => {
   getListRoom(req.user).then((rooms) => {
+    res.json(rooms);
+  });
+});
+
+router.get("/roomManyView", (req, res) => {
+  getRoomManyView().then((rooms) => {
     res.json(rooms);
   });
 });

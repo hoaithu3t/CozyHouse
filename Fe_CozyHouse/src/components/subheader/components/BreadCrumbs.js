@@ -9,7 +9,7 @@ export function BreadCrumbs({ items }) {
 
   return (
     <div className="d-flex align-items-center font-weight-bold my-2">
-      <Link className="opacity-75 hover-opacity-100" to="/dashboard">
+      <Link className="opacity-75 hover-opacity-100" to="/">
         <i className="flaticon2-shelter text-white icon-1x" />
       </Link>
       {items.map((item, index) => (

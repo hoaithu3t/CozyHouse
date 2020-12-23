@@ -42,6 +42,13 @@ export function RoomEditForm({
   const { authUser } = useContext(authCtx);
   const [linksImg, setLinksImg] = useState([]);
 
+  useEffect(() => {
+    if (room) {
+        if(room.img) setLinksImg(room.img)
+      }
+    // server call for getting Room by id
+  }, [room]);
+
 
   // const hasEditPermission = usePermission('IPay.Rooms.Edit');
 

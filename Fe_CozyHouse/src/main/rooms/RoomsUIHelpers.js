@@ -58,5 +58,5 @@ export const initRoom = {
   otherUtility: null, //tiện ích khác
   inputTimeRemain: '', // thời gian bài đăng hiển thị
   timeRemain: 0, //tuần/tháng năm
-  photoUrl: null, // ảnh bài đăng
+  photoUrl: [], // ảnh bài đăng
 };

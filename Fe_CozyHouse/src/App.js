@@ -57,13 +57,11 @@ function App() {
         <Header />
         <Switch>
           <Route path="/" exact component={Dashboard} />
-          <Route path="/dashboard" component={Dashboard} />
           <Route path="/setting" component={Setting} />
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
           <Route path ={"/:id/roomDetail"} component = {RoomDetail} />
           {/* <Route path="/room_list" component={RoomList} /> */}
-
           <Route path="/room_list" component={RoomsList} />
           <Route path="/post_detail" component={PostDetail} />
           <Route path="/customer" component={Customer} />
