@@ -51,8 +51,7 @@ export const fetchRoomsFilter = (queryParams) => (dispatch) => {
   return requestFromServer
     .findRoomsFilter(newParams)
     .then((response) => {
-      const { totalCount, room } = response.data;
-      
+      const { totalCount, room } = response.data;      
       dispatch(actions.roomsFetched({ totalCount, entities: room }));
     })
     .catch((error) => {

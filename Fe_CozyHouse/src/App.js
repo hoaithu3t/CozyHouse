@@ -11,6 +11,8 @@ import { useAsync } from "react-hook-async";
 import { Dashboard } from "./components/dashboard";
 // import RoomList from "./components/room_list/RoomList";
 import {RoomsList} from "./main/rooms/room-list/RoomsList"
+import {RoomDetail} from '../src/main/rooms/room-detail/RoomDetail'
+
 
 import PostDetail from "./components/post_detail/PostDetail";
 
@@ -59,7 +61,7 @@ function App() {
           <Route path="/setting" component={Setting} />
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
-
+          <Route path ={"/:id/roomDetail"} component = {RoomDetail} />
           {/* <Route path="/room_list" component={RoomList} /> */}
           <Route path="/room_list" component={RoomsList} />
           <Route path="/post_detail" component={PostDetail} />

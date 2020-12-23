@@ -7,17 +7,25 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../redux/rooms/roomsActions';
 import { isEqual } from 'lodash';
 import { Formik } from 'formik';
-
+import {RoomItem} from '../../../components/room_list'
+import { Link } from "react-router-dom";
+import '../../../css/index.css'
+import { useHistory } from "react-router-dom";
 export function RoomsList() { 
 
-  const { customerFilter } = useSelector(
+ 
+
+  const { roomFilter } = useSelector(
     (state) => ({      
-      customerFilter: state.customers.entities,
+      roomFilter: state.rooms.entities,
     }),
     shallowEqual,
   );
 
-  console.log(customerFilter)
+  console.log(roomFilter)
+
+  var RoomList 
+
   const [queryParams, setQueryParams] = useState({
     filter: {
       title: ''
@@ -62,6 +70,10 @@ export function RoomsList() {
       setQueryParams(newQueryParams);
     }
   };
+  const history = useHistory()
+  const remoteToDetail = (id) => {
+    history.push(`/${id}/roomDetail`);
+  }
 
   return (
     <>
@@ -103,7 +115,27 @@ export function RoomsList() {
           </form>
         )}
       </Formik>
-                
+      <div className="roomlist-container">
+      {
+                    roomFilter && roomFilter.map(room => {
+                      var {_id, address, area, numberOfRoom, price, title } = room;
+                      return (                        
+                        <RoomItem 
+                        title={title}
+                        location={address}
+                        price={price}
+                        area={area}
+                        number_of_room={numberOfRoom}
+                        onClick = {() => remoteToDetail(_id)}
+                        />
+                      )
+                    }
+                    )
+                }
+      </div>
+              
+
+             
 
     </>
   );

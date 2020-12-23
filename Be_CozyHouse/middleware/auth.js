@@ -15,6 +15,7 @@ const authMiddleware = (option = { optional: false }) => (req, res, next) => {
       const user = await User.findOne({
         username: tokenPayload.username,
       }).select(['-hash', '-salt']);
+
       if (user) {
         req.user = user;
         req.token = token;

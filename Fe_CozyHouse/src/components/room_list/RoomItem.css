@@ -1,6 +1,6 @@
 .post-container {
   width: 245px;
-  margin: 10px;
+  margin: 20px;
 }
 .item-list-container {
   margin-left: 10%;
@@ -20,6 +20,7 @@
 }
 .post-name {
   font-size: 16px;
+  font-weight: 600;
 }
 .price {
   font-size: 13px;
@@ -28,4 +29,15 @@
 h2 {
   margin-top: 15px;
   margin-left: 37px;
+}
+
+a,
+a:link,
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+.post-title {
+  margin-left: 10px;
 }

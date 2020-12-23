@@ -70,19 +70,24 @@ const getListRoom = async (user) => {
   return room;
 };
 
-const searchRoom = async (req) => {
-  console.log(req)
-  const { filterTitle } = querys;
-  const room = await Room.aggregate()
-  //   .find({
-  //      $and: [
-  //     { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}}
-  //     ]
-  //   })  
-  //   .limit(100)
-  //   .match({ expired: false })
-  //   .exec();
-  return room;
+const searchRoom = async (filter) => {
+  const { filterTitle, skipCount, maxResultCount } = filter;
+   var totalCount;
+  await Room.find().exec(function (err, results) {    
+    totalCount = results.length
+  });
+  const room = await Room
+    .find({
+       $and: [
+        { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
+        //  { expired: false }
+         // chưa chỉnh hạn đăng bai
+      ]
+    })  
+    .skip(Number(skipCount))
+    .limit(Number(maxResultCount))
+    .exec();
+  return { totalCount, room };
 };
 
 
