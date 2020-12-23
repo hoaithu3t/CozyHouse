@@ -316,7 +316,7 @@ button:focus {
 .btn {
   padding:2px;
 }
-.fas {
+.icon-image {
   margin-right: 8px;
   border-radius: 50%;
   border: 1px solid;
@@ -324,20 +324,14 @@ button:focus {
   width: 31px;
   height: 26px;
 }
-.far {
-  margin-right: 8px;
-  border-radius: 50%;
-  border: 1px solid;
-  padding: 4px;
-  width: 31px;
-  height: 26px;
-}
-
 @media only screen and (max-width: 768px){
   #Popover1 {
    right: 10px;
    width: 40px !important;
    height: 40px !important;
+  }
+  .form-inline {
+    display:none !important;
   }
   .logo {
    margin-left: -21px;
@@ -376,15 +370,31 @@ button:focus {
  .cosyHome {
   margin-left: 12px;
  }
+ .icon-image {
+  display: none !important;
+}
  }
  @media only screen and (max-width: 992px){
   #Popover1 {
    right: 10px;
-   width: 50px !important;
-   height: 50px !important;
+  }
+  .form-inline {
+    display:none !important;
+  }
+  .inp-search {
+    display: none !important;
+  }
+  .disable-768px {
+  display: none !important;
+  }
+  .contact {
+  display: none;
   }
   .logo {
    margin-left: 77px;
+  }
+  .material-icons {
+    display: none;
   }
  .title_search_home {
   font-size: 30px;
@@ -405,54 +415,58 @@ button:focus {
  .cosyHome {
   margin-left: 12px;
  }
- .far {
+ .icon-image {
    display: none !important;
  }
- .fas {
-  display: none !important;
-}
  }
- @media only screen and (max-width: 1200px){
+ @media only screen and (max-width: 1100px){
   #Popover1 {
-   right: 10px;
-   width: 50px !important;
-   height: 50px !important;
+    right: 10px;
+   }
+   .form-inline {
+    display:none !important;
   }
-  .logo {
-   margin-left: 77px;
-  }
- .title_search_home {
+   .inp-search {
+     display: none !important;
+   }
+   .disable-768px {
+   display: none !important;
+   }
+   .contact {
+   display: none;
+   }
+   .logo {
+    margin-left: 77px;
+   }
+   .material-icons {
+     display: none;
+   }
+  .title_search_home {
   font-size: 37px;
   margin-left: 158px;
   margin-top: 26px;
- }
- .btn {
-  margin-left: 123px;
- }
- .near {
-  margin-left: 54px;
- }
- .best {
-  margin-left: 54px;
- }
- .discover {
-   width: 68px;
-   height: 20px;
-   margin-top: 6px;
- }
- .explore {
-  font-size: 14px;
- }
- .enhance {
-  margin-left: -10px;
- }
- .cosyHome {
-  margin-left: 12px;
- }
- .far {
-   display: none !important;
- }
- .fas {
-  display: none !important;
-}
- }
+  }
+  .btn {
+    margin-left: 123px;
+  }
+  .near {
+    margin-left: 54px;
+  }
+  .best {
+    margin-left: 54px;
+  }
+  .discover {
+    width: 68px;
+    height: 20px;
+    margin-top: 6px;
+  }
+  .explore {
+    font-size: 14px;
+  }
+  .enhance {
+    margin-left: -10px;
+  }
+  .cosyHome {
+    margin-left: 12px;
+  }
+  }
