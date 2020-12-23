@@ -10,7 +10,7 @@ class RoomItem extends Component {
             <div className="post-container">
                 <img src = {roomImg} width = "245px" height = "154px"/>
                 <div className="post-title">
-                    <p className="room-information"> {location} - {area}m2 - {number_of_room} Phòng</p>
+                    <p className="room-information"> {location} - {area}m2 - {number_of_room} phòng</p>
                     <p className="post-name">{title}</p>
                     <p className="price"> {price}₫ / Tháng</p>
                 </div>
