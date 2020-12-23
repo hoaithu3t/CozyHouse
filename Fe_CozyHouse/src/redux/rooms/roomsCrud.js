@@ -22,6 +22,7 @@ export function getAllRooms(token) {
   );
 }
 export function findRoomsFilter(queryParams) {
+  console.log(queryParams)
   return axios.get(`${ROOM_URL}/search`, { params: queryParams });
 }
 

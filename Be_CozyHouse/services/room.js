@@ -71,18 +71,19 @@ const getListRoom = async (user) => {
   return room;
 };
 
-const searchRoom = async (req) => {
-  console.log(req)
-  const { filterTitle } = querys;
-  const room = await Room.aggregate()
-  //   .find({
-  //      $and: [
-  //     { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}}
-  //     ]
-  //   })  
-  //   .limit(100)
-  //   .match({ expired: false })
-  //   .exec();
+const searchRoom = async (filter) => {
+  const { filterTitle, skipCount, maxResultCount } = filter;
+  const room = await Room
+    .find({
+       $and: [
+        { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
+        //  { expired: false }
+         // chưa chỉnh hạn đăng bài
+      ]
+    })  
+    .skip(Number(skipCount))
+    .limit(Number(maxResultCount))
+    .exec();
   return room;
 };
 

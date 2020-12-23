@@ -33,9 +33,10 @@ router.post("/find",authMdw(), (req, res) => {
 });
 
 router.get("/search", (req, res) => {
-  searchRoom(req).then((rooms) => res.json(rooms));
+    searchRoom(req.query).then((result) => {
+    res.json(result);
+  });
 });
-
 router.get("/:id",authMdw({ optional: true }), (req, res) => {
   const { id } = req.params;
   getRoom(id).then((room) => res.json(room));
