@@ -47,7 +47,6 @@ const findRoom = async (user, filter) => {
     totalCount = results.length
   });
   var room = await Room
-  .aggregate()
     .find({
        $and: [
       { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}},
