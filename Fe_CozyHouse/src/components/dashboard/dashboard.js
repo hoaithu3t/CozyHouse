@@ -38,19 +38,19 @@ const Dashboard = () => {
         {/* loai nha */}
         <div className="row p-3 m-4 text-white text-center" style = {{backgroundColor: "#DB647E" , borderRadius: "10px"}}>
           <div className ="col-sm-2 col-xl">
-          <i class="fas fa-home"></i>
+          <i class="fas fa-home icon-image"></i>
             Nhà trọ
           </div>
           <div className="col-sm col-xl">
-          <i class="far fa-building"></i>
+          <i class="far fa-building icon-image"></i>
             Chung cư mini
           </div>
           <div className="col-sm col-xl">
-          <i class="fas fa-laptop-house"></i>
+          <i class="fas fa-laptop-house icon-image"></i>
             Nhà nguyên căn
           </div>
           <div className="col-sm-4 col-xl">
-          <i class="fas fa-city"></i>
+          <i class="fas fa-city icon-image"></i>
             Chung cư nguyên căn
           </div>
         </div>
