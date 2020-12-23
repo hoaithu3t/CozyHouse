@@ -24,6 +24,9 @@ export function ActionsColumnFormatter(
     hasDeletePermission,
   },
 ) {
+  const pStyle = {
+    width : "100px"
+  }
   return (
     <>
       {/* {hasApprovePermission && */}
@@ -31,9 +34,9 @@ export function ActionsColumnFormatter(
           <>
             <OverlayTrigger
               overlay={
-                <Tooltip id="rooms-approve-tooltip">
-                  {('IPay::ApproveRoom')}
-                </Tooltip>
+              <Tooltip style={pStyle} id="rooms-approve-tooltip">
+                {('Phê duyệt')}
+              </Tooltip>
               }>
               <a
                 className="btn btn-icon btn-light btn-hover-success btn-sm"
@@ -43,9 +46,9 @@ export function ActionsColumnFormatter(
             </OverlayTrigger>
             <OverlayTrigger
               overlay={
-                <Tooltip id="rooms-reject-tooltip">
-                  {('IPay::RejectRoom')}
-                </Tooltip>
+                <Tooltip  style={pStyle} id="rooms-reject-tooltip">
+                {('Từ Chối')}
+              </Tooltip>
               }>
               <a
                 className="btn btn-icon btn-light btn-hover-danger btn-sm ml-3"
@@ -58,9 +61,9 @@ export function ActionsColumnFormatter(
         {/* )} */}
       <OverlayTrigger
         overlay={
-          <Tooltip id="rooms-detail-tooltip" className = "d-flex">
-            Xem chi tiết
-          </Tooltip>
+          <Tooltip  style={pStyle} id="rooms-detail-tooltip">
+          Xem chi tiết
+        </Tooltip>
         }>
         <a
           className="btn btn-icon btn-light btn-hover-warning btn-sm ml-3"
@@ -72,9 +75,9 @@ export function ActionsColumnFormatter(
       {/* {hasEditPermission && ( */}
         <OverlayTrigger
           overlay={
-            <Tooltip id="rooms-edit-tooltip">
-              {('IPay::EditRoom')}
-            </Tooltip>
+            <Tooltip  style={pStyle} id="rooms-edit-tooltip">
+            {('Chỉnh sử')}
+          </Tooltip>
           }>
           <a
             className="btn btn-icon btn-light btn-hover-primary btn-sm ml-3"
@@ -87,9 +90,9 @@ export function ActionsColumnFormatter(
       {/* {hasDeletePermission && ( */}
         <OverlayTrigger
           overlay={
-            <Tooltip id="rooms-delete-tooltip">
-              Xóa
-            </Tooltip>
+            <Tooltip  style={pStyle} id="rooms-delete-tooltip">
+            Xóa
+          </Tooltip>
           }
       >
           <a

@@ -33,7 +33,7 @@ const createRoom = (user, room) => {
   fs.mkdirSync(rootFolderPath + postFolderPath, { recursive: true });
   fs.writeFileSync(
     rootFolderPath + postFolderPath + `/${newRoom.slug}.md`,
-    "add oke"
+    "insert oke"
   );
   newRoom.contentFilePath = postFolderPath + `/${newRoom.slug}.md`;
   return newRoom.save();

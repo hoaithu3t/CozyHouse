@@ -72,7 +72,7 @@ const Header = () => {
         </Navbar.Brand>
         
         <div >
-          <div className = "pb-2 pt-0">
+          <div className = "pb-2 pt-0 disable-768px">
             <b className="m-4 pointer">
               <img src={iconHeart} />
             </b>

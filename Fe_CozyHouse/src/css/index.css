@@ -293,3 +293,166 @@ button:focus {
   margin-left: 15%;
   width: 70%;
 }
+.title_search_home{
+  color: #ffff !important;
+  font-size: 54px;
+  font-weight: 600;
+}
+.button-material-icons icon{
+  color: white;
+}
+.discover {
+  background-color: #f38e9c !important;
+  border-radius: 10px !important;
+  width: 230px;
+  height: 50px;
+  margin-left: 120px;
+  color: #ffff;
+  margin-top: 20px;
+}
+.explore{
+  font-size: 27px;
+}
+.btn {
+  padding:2px;
+}
+.fas {
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 1px solid;
+  padding: 4px;
+  width: 31px;
+  height: 26px;
+}
+.far {
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 1px solid;
+  padding: 4px;
+  width: 31px;
+  height: 26px;
+}
+
+@media only screen and (max-width: 768px){
+  #Popover1 {
+   right: 10px;
+   width: 40px !important;
+   height: 40px !important;
+  }
+  .logo {
+   margin-left: -21px;
+  }
+  .inp-search {
+     display: none !important;
+  }
+  .disable-768px {
+   display: none !important;
+ }
+ .contact {
+   display: none;
+ }
+ .title_search_home {
+  font-size: 18px;
+  margin-left: 107px;
+  margin-top: 21px;
+ }
+ .discover {
+   width: 68px;
+   height: 20px;
+   margin-top: 6px;
+ }
+ .explore {
+  font-size: 14px;
+ }
+ .material-icons {
+   display: none;
+ }
+ .founder {
+   display: none;
+ }
+ .enhance {
+  margin-left: -10px;
+ }
+ .cosyHome {
+  margin-left: 12px;
+ }
+ }
+ @media only screen and (max-width: 992px){
+  #Popover1 {
+   right: 10px;
+   width: 50px !important;
+   height: 50px !important;
+  }
+  .logo {
+   margin-left: 77px;
+  }
+ .title_search_home {
+  font-size: 30px;
+  margin-left: 64px;
+  margin-top: 20px;
+ }
+ .discover {
+   width: 68px;
+   height: 20px;
+   margin-top: 6px;
+ }
+ .explore {
+  font-size: 14px;
+ }
+ .enhance {
+  margin-left: -10px;
+ }
+ .cosyHome {
+  margin-left: 12px;
+ }
+ .far {
+   display: none !important;
+ }
+ .fas {
+  display: none !important;
+}
+ }
+ @media only screen and (max-width: 1200px){
+  #Popover1 {
+   right: 10px;
+   width: 50px !important;
+   height: 50px !important;
+  }
+  .logo {
+   margin-left: 77px;
+  }
+ .title_search_home {
+  font-size: 37px;
+  margin-left: 158px;
+  margin-top: 26px;
+ }
+ .btn {
+  margin-left: 123px;
+ }
+ .near {
+  margin-left: 54px;
+ }
+ .best {
+  margin-left: 54px;
+ }
+ .discover {
+   width: 68px;
+   height: 20px;
+   margin-top: 6px;
+ }
+ .explore {
+  font-size: 14px;
+ }
+ .enhance {
+  margin-left: -10px;
+ }
+ .cosyHome {
+  margin-left: 12px;
+ }
+ .far {
+   display: none !important;
+ }
+ .fas {
+  display: none !important;
+}
+ }
