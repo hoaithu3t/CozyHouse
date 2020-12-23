@@ -17,7 +17,7 @@ const {
 const router = require("express").Router();
 
 router.post("/", authMdw(), (req, res) => {
-  createRoom(req.user, req.body.querys).then((room) => res.json(room));
+  createRoom(req.user, req.body).then((room) => res.json(room));
 });
 
 router.get("/", authMdw({ optional: false }), (req, res) => {
