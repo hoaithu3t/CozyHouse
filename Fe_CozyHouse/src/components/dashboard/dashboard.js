@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import "../../scss/dashboard.scss";
 import "../../css/index.css";
 import cover from "./cover.png";
+import { useHistory } from "react-router-dom";
+
 // import { Container } from "react-bootstrap";
 
 // const style = {
@@ -16,6 +18,10 @@ import cover from "./cover.png";
 // };
 // linear-gradient(96.98deg, #DB647E 0%, #FDA2A9 100%)
 const Dashboard = () => {
+  const history = useHistory();
+  const remoteToDetail = () => {
+    history.push(`/room_list`);
+  }
   return (
     <>
       <div className = "search-home">
@@ -35,22 +41,26 @@ const Dashboard = () => {
       
       <div className="container">
 
+
+
         {/* loai nha */}
-        <div className="row p-3 m-4 text-white text-center" style = {{backgroundColor: "#DB647E" , borderRadius: "10px"}}>
-          <div className ="col-sm-2 col-xl">
-          <i class="fas fa-home icon-image"></i>
+        <div  className="row p-3 m-4 text-white text-center" style = {{backgroundColor: "#DB647E" , borderRadius: "10px"}}>
+          
+          <div onClick= {() => remoteToDetail()} style = {{ cursor: "pointer"}} className ="col-sm-2 col-xl ">
+          <i class="fas fa-home"></i>
             Nhà trọ
           </div>
-          <div className="col-sm col-xl">
-          <i class="far fa-building icon-image"></i>
+          <div onClick= {() => remoteToDetail()} style = {{ cursor: "pointer"}} className="col-sm col-xl">
+          <i class="far fa-building"></i>
             Chung cư mini
           </div>
-          <div className="col-sm col-xl">
-          <i class="fas fa-laptop-house icon-image"></i>
+          <div onClick= {() => remoteToDetail()} style = {{ cursor: "pointer"}} className="col-sm col-xl">
+          <i class="fas fa-laptop-house"></i>
             Nhà nguyên căn
           </div>
-          <div className="col-sm-4 col-xl">
-          <i class="fas fa-city icon-image"></i>
+          <div onClick= {() => remoteToDetail()} style = {{ cursor: "pointer"}} className="col-sm-4 col-xl">
+          <i class="fas fa-city"></i>
+
             Chung cư nguyên căn
           </div>
         </div>

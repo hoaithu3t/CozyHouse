@@ -72,7 +72,7 @@ export function RoomsList() {
 
   return (
     <>
-      {/* filter */}
+      {/* filter */}    
        <Formik
         initialValues={{
           title: ''
@@ -115,7 +115,7 @@ export function RoomsList() {
                     roomFilter && roomFilter.map(room => {
                       var {_id, address, area, numberOfRoom, price, title } = room;
                       return (                        
-                        <RoomItem 
+                        <RoomItem  
                         title={title}
                         location={address}
                         price={price}

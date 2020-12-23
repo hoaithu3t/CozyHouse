@@ -1,0 +1,82 @@
+p {
+  margin: 0px !important;
+  padding: 0px;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.content {
+  padding-top: 10px;
+  width: 67%;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 600;
+}
+
+.header-content {
+  display: flex;
+  border-bottom: 1px solid #c4c4c4;
+  padding-bottom: 30px;
+  justify-content: space-between;
+}
+
+.main {
+  padding-top: 10px;
+}
+
+.decription {
+  width: 70%;
+  margin-left: 15%;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.item {
+  display: flex;
+  width: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+.utility {
+  padding-top: 30px;
+  justify-content: space-between;
+
+  display: flex;
+  flex-flow: wrap;
+  border-top: 1px solid #c4c4c4;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 500;
+  color: #df3e43;
+}
+
+.user {
+  display: flex;
+  padding-top: 16px;
+  padding-right: 20px;
+}
+
+.address {
+  color: #5e5e5e;
+}
+
+.room-infor {
+  color: #c4c4c4;
+  padding-left: 15px;
+}
+
+.nearby-place {
+  border: 1px solid red;
+  padding: 1px 4px 2px 4px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
