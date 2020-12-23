@@ -22,7 +22,6 @@ const register = async ({ username, CMND, address, phone, email, password, role,
     status
   });
   newUser.generatePassword(password);
-  console.log(newUser)
   return newUser.save();
 };
 

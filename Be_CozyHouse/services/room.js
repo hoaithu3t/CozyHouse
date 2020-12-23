@@ -21,7 +21,7 @@ const createRoom = (user, room) => {
     equipment: room.equipment, //not oke
     inputtimeRemain: room.timeRemain,
     timeRemain: room.timeRemain,
-    status: room.status,
+    status: 0,
     availability: room.availability,
     expired: room.expired,
     description: room.description,
@@ -39,20 +39,28 @@ const createRoom = (user, room) => {
   return newRoom.save();
 };
 
-const searchRoom = async (title) => {
-  const room = await Room.aggregate()
-    .limit(10)
-    .match({ title: title })
-    .sort({ createdAt: -1 })
-    .lookup({
-      from: "users",
-      localField: "author",
-      foreignField: "_id",
-      as: "author",
-    })
-    .unwind("author")
+const findRoom = async (user, filter) => {
+  const { filterTitle, skipCount, maxResultCount, filterRoomStatus } = filter.querys;
+
+  var totalCount;
+  await Room.aggregate().match({ author: user._id }).exec(function (err, results) {    
+    totalCount = results.length
+  });
+  var room = await Room
+  .aggregate()
+    .find({
+       $and: [
+      { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}},
+      { author: user._id },
+      ]
+    })  
+    .skip(Number(skipCount))
+    .limit(Number(maxResultCount))
     .exec();
-  return room;
+  if (filterRoomStatus !== undefined) {
+   room = room.filter(r => r.status === Number(filterRoomStatus))
+  }
+  return {totalCount, room };
 };
 
 const getListRoom = async (user) => {
@@ -63,19 +71,27 @@ const getListRoom = async (user) => {
   return room;
 };
 
-const getRoom = async (id) => {
+const searchRoom = async (req) => {
+  console.log(req)
+  const { filterTitle } = querys;
   const room = await Room.aggregate()
-    .match({ _id: id })
-    .limit(1)
-    .lookup({
-      from: "users",
-      localField: "author",
-      foreignField: "_id",
-      as: "author",
-    })
-    .unwind("author")
-    .exec();
-  return room[0];
+  //   .find({
+  //      $and: [
+  //     { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}}
+  //     ]
+  //   })  
+  //   .limit(100)
+  //   .match({ expired: false })
+  //   .exec();
+  return room;
+};
+
+
+const getRoom = async (id) => {
+  const room = await Room.findOne({
+    _id: id,
+  });
+  return room;
 };
 
 const updateRoom = async (id, room) => {
@@ -86,28 +102,33 @@ const updateRoom = async (id, room) => {
 };
 
 const approveRoom = async (id) => {
-  const newRoom = await User.findOneAndUpdate({ _id: id }, {status: 1}, {
+  const newRoom = await Room.findOneAndUpdate({ _id: id }, {status: 1}, {
     new: true,
   });
   return newRoom;
 };
 
+const getDetailRoom = async (id) => {
+  const rooms = await Room.find({ _id: id, expired: false }).exec();
+  return rooms
+}
+
 const rejectRoom = async (id, reason) => {
-  const newRoom = await User.findOneAndUpdate({ _id: id }, {status: 2, reasonReject: reason}, {
+  const newRoom = await Room.findOneAndUpdate({ _id: id }, {status: 2, reasonReject: reason}, {
     new: true,
   });
   return newRoom;
 };
 
 const changeAvailabilityRoom = async (id) => {
-  const newRoom = await User.findOneAndUpdate({ _id: id }, {availability: !availability}, {
+  const newRoom = await Room.findOneAndUpdate({ _id: id }, {availability: !availability}, {
     new: true,
   });
   return newRoom;
 };
 
 const reportRoom = async (id) => {
-  const newRoom = await User.findOneAndUpdate({ _id: id }, {report: true}, {
+  const newRoom = await Room.findOneAndUpdate({ _id: id }, {report: true}, {
     new: true,
   });
   return newRoom;
@@ -130,7 +151,9 @@ module.exports = {
   updateRoom,
   approveRoom,
   rejectRoom,
+  getDetailRoom,
   changeAvailabilityRoom,
   reportRoom,
   searchRoom,
+  findRoom
 };

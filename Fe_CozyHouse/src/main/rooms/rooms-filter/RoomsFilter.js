@@ -5,16 +5,19 @@ import { useRoomsUIContext } from '../RoomsUIContext';
 // import i18n from 'i18next';
 
 const prepareFilter = (queryParams, values) => {
-  const { room } = values;
+  const { title } = values;
   const newQueryParams = { ...queryParams };
   const filter = {};
 
-  // Filter by name
-  filter.model = room;
+  // Filter by titleRoom
+  filter.model = title;
   // Filter by Name
-  if (room) {
-    filter.name = room;
+  if (title) {
+    filter.title = title;
   } 
+  else {
+    filter.title = "";
+  }
   newQueryParams.filter = filter;
   return newQueryParams;
 };
@@ -44,7 +47,7 @@ export function RoomsFilter() {
     <>
       <Formik
         initialValues={{
-          room: ''
+          title: ''
         }}
         onSubmit={(values) => {
           applyFilter(values);
@@ -53,26 +56,25 @@ export function RoomsFilter() {
           values,
           handleSubmit,
           handleBlur,
-          handleChange,
           setFieldValue,
         }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
-            <div className="form-group row">
-              <div className="col-lg-2">
+            <div className="form-group row m-5">
+              <div className="col-lg-4">
                 <input
                   type="text"
                   className="form-control"
-                  name="room"
-                  placeholder= "Tìm kiếm theo tên người đăng"
+                  name="title"
+                  placeholder= "Tiêu đề"
                   onBlur={handleBlur}
-                  value={values.searchText}
+                  value={values.title}
                   onChange={(e) => {
-                    setFieldValue('room', e.target.value);
+                    setFieldValue('title', e.target.value);
                     handleSubmit();
                   }}
                 />
                 <small className="form-text text-muted">
-                  <b>{'IPay::SearchByName'}</b>
+                  <b>Tìm kiếm theo tiêu đề</b>
                 </small>
               </div>
              

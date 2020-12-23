@@ -1,5 +1,5 @@
 const ERROR = {
-  USERNAME_EXISTED: "auth/register/username_existed",
+  USERNAME_EXISTED: "auth/register/username_exist",
 
   USERNAME_NOT_EXISTED: "auth/login/username_not_existed",
   PASSWORD_NOT_MATCHED: "auth/login/password_not_matched",

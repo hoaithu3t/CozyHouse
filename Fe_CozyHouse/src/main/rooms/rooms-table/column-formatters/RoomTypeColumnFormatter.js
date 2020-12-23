@@ -4,11 +4,26 @@
 import React from 'react';
 // import { RoomType } from '../../RoomsUIHelpers';
 
+const GetTypeRoom = (num) => {
+  // eslint-disable-next-line default-case
+  switch (num) {
+    case "0":
+      return "Phòng trọ"
+    case "1":
+      return "Chung cư mini"
+    case "2":
+      return "Nhà nguyên căn"
+    case "3":
+      return "Chung cư nguyên căn" 
+}
+}
 
 export function RoomTypeColumnFormatter(cellContent, row) {
   return (
     <>
-      {/* <span>{(`IPay::RoomType.${RoomType[row.roomType]}`)}</span> */}
+      {        
+       GetTypeRoom(row.typeOfRoom)
+      }
     </>
   );
 }

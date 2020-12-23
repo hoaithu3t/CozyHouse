@@ -34,8 +34,8 @@ const getCustomers = async (filter) => {
     .skip(Number(skipCount))
     .limit(Number(maxResultCount))
     .exec();
-  if (filter.filterStatus !== undefined) {
-   customer = customer.filter(cus => cus.status === Number(filter.filterStatus))
+  if (filterStatus !== undefined) {
+   customer = customer.filter(cus => cus.status === Number(filterStatus))
   }
   return {totalCount, customer };
 };
@@ -78,7 +78,6 @@ const deleteCustomer = async (id) => {
   const newCustomer2 = await User.findOne({
     _id: id,
   });
-  console.log(newCustomer2)
   return true;
 };
 

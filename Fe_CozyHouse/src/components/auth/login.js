@@ -51,7 +51,7 @@ const Login = (props) => {
           props.onHide();
         })
         .catch((e) => {
-          console.log(e.message);
+          console.log(e);
           setFailureModalVisible(true);
         });
     },
@@ -100,6 +100,7 @@ const Login = (props) => {
             </Form.Control.Feedback>
           </Form.Group>
           
+          <div>
           <Button
             className="m-color border-none"
             type="submit"
@@ -107,7 +108,8 @@ const Login = (props) => {
             disabled={loginApiData.loading}
           >
             {loginApiData.loading ? "Đang đăng nhập" : "Đăng nhập"}
-          </Button>
+            </Button>
+            </div>
 
           <Form.Label>
             Bạn chưa có tài khoản? &nbsp;
@@ -116,7 +118,8 @@ const Login = (props) => {
             </span>
             &nbsp; ngay!
           </Form.Label>
-        </Form>    </Modal.Body>
+        </Form>
+      </Modal.Body>
     <Modal.Footer>
       <Button variant="info" onClick={props.onHide}>
         Đóng

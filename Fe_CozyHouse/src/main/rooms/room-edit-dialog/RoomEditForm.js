@@ -2,11 +2,12 @@
 // Data validation is based on Yup
 // Please, be familiar with article first:
 // https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Modal } from 'react-bootstrap';
 // import * as actionsBank from '../../../../redux/banks/banksActions';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
+import { useAsync } from "react-hook-async";
 import * as Yup from 'yup';
 import {
   Input,
@@ -21,6 +22,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { kitchenType, Gender, RoomStatus, timeRemainType } from '../RoomsUIHelpers';
 // import { usePermission } from '../../../../hooks/UsePermission';
+import { uploadFile } from "../../../api/file";
+import authCtx from "../../../contexts/auth";
 
 
 export function RoomEditForm({
@@ -34,6 +37,9 @@ export function RoomEditForm({
   disabled,
 }) {
 
+    const { authUser, setAuthUser } = useContext(authCtx);
+
+
   // const hasEditPermission = usePermission('IPay.Rooms.Edit');
 
   // Validation schema
@@ -45,6 +51,18 @@ export function RoomEditForm({
     phone: Yup.string(),
     socialIdOrBusinessLicense: Yup.string(),
   });
+
+  const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
+  let fileInput;
+  const onChooseImage = (event, setFieldValue) => {
+    if (event.target.files.length < 1) return;
+    callUploadFileApi(event.target.files[0], authUser.token).then((res) =>
+      setFieldValue("photoUrl", res.data)
+      // console.log(res.data)
+    );
+  };
+  
+
 
   const getRentCost = (number, time) => {
     let cost;
@@ -400,7 +418,36 @@ export function RoomEditForm({
                     {values.inputTimeRemain && values.timeRemain ? getRentCost(values.inputTimeRemain, values.timeRemain) : ""}
                   </div>
                 </div>
-   
+
+          {/* <div className="form-group row ml-2">
+            <h4 className="code">Photo</h4>
+            <div className="align-items-center">
+              {uploadFileApi.loading ? (
+                "Loading ..."
+              ) : (
+                <img
+                  src={
+                    process.env.REACT_APP_API_DOMAIN +
+                    "/" +
+                    values.photoUrl
+                  }
+                  alt=""
+                  onClick={() => fileInput.click()}
+                  style={{ width: "80px", height: "80px" }}
+                  className="border rounded-circle m-3"
+                />
+              )}
+              <br />
+              <FormControl
+                className="ml-3 bg-red"
+                type="file"
+                hidden
+                ref={(file) => (fileInput = file)}
+                accept="image/png, image/jpeg"
+                onChange={() => onChooseImage(setFieldValue)}
+              />
+            </div>
+            </div>    */}
               </Form>
             </Modal.Body>   
 

@@ -4,10 +4,10 @@ import * as actions from '../../redux/rooms/roomsActions';
 import { useDispatch } from 'react-redux';
 // import { RoomsLoadingDialog } from './rooms-loading-dialog/RoomsLoadingDialog';
 import { RoomEditDialog } from './room-edit-dialog/RoomEditDialog';
-// import { RoomDeleteDialog } from './room-delete-dialog/RoomDeleteDialog';
-// import { RoomDetailDialog } from './room-detail-dialog/RoomDetailDialog';
-// import { RoomApproveDialog } from './room-approve-dialog/RoomApproveDialog';
-// import { RoomRejectDialog } from './room-reject-dialog/RoomRejectDialog';
+import { RoomDeleteDialog } from './room-delete-dialog/RoomDeleteDialog';
+import { RoomDetailDialog } from './room-detail-dialog/RoomDetailDialog';
+import { RoomApproveDialog } from './room-approve-dialog/RoomApproveDialog';
+import { RoomRejectDialog } from './room-reject-dialog/RoomRejectDialog';
 // import { RoomsFetchDialog } from './rooms-fetch-dialog/RoomsFetchDialog';
 import { RoomsUIProvider } from './RoomsUIContext';
 import { RoomsCard } from './RoomsCard';
@@ -60,17 +60,17 @@ export default function Rooms({ history }) {
           />
         )}
       </Route>
-      {/* <Route path="/rooms/:id/edit">
+      <Route path="/rooms/:id/edit">
         {({ history, match }) => (
           <RoomEditDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push('/room');
+              history.push('/rooms');
             }}
           />
         )}
-      </Route> */}
+      </Route>
        {/* <Route path="/rooms/approveRooms">
         {({ history, match }) => (
           <RoomsApproveDialog
@@ -91,29 +91,29 @@ export default function Rooms({ history }) {
           />
         )}
       </Route> */}
-      {/* <Route path="/rooms/:id/delete">
+      <Route path="/rooms/:id/delete">
         {({ history, match }) => (
           <RoomDeleteDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push('/room');
+              history.push('/rooms');
             }}
           />
         )}
-      </Route> */}
-      {/* <Route path="/rooms/:id/detail">
+      </Route>
+      <Route path="/rooms/:id/detail">
         {({ history, match }) => (
           <RoomDetailDialog
             show={match != null}
             id={match && match.params.id}
             onHide={() => {
-              history.push('/room');
+              history.push('/rooms');
             }}
           />
         )}
-      </Route> */}
-      {/* <Route path="/rooms/:id/approve">
+      </Route>
+      <Route path="/rooms/:id/approve">
         {({ history, match }) => (
           <RoomApproveDialog
             show={match != null}
@@ -121,12 +121,12 @@ export default function Rooms({ history }) {
             onHide={() => {
               history.location.state &&
                 dispatch(actions.fetchRooms(history.location.state));
-              history.push('/room');
+              history.push('/rooms');
             }}
           />
         )}
-      </Route> */}
-      {/* <Route path="/rooms/:id/r6eject">
+      </Route>
+      <Route path="/rooms/:id/reject">
         {({ history, match }) => (
           <RoomRejectDialog
             show={match != null}
@@ -134,11 +134,11 @@ export default function Rooms({ history }) {
             onHide={() => {
               // history.location.state &&
               //   dispatch(actions.fetchRooms(history.location.state));
-              history.push('/room');
+              history.push('/rooms');
             }}
           />
         )}
-      </Route>yth78 */}
+      </Route>
       {/* <Route path="/rooms/fetch">
         {({ history, match }) => (
           <RoomsFetchDialog

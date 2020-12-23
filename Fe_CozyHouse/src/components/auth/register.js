@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Modal, Alert } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { register } from "../../api/auth";
@@ -8,7 +8,8 @@ import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Radio from '@material-ui/core/Radio';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import { CustomerType} from '../../main/customers/CustomersUIHelpers';
+import { CustomerType } from '../../main/customers/CustomersUIHelpers';
+import {Select} from '../forms'
 
 
 
@@ -36,23 +37,29 @@ const Register = (props) => {
   const formik = useFormik({
     validationSchema: SignInSchema,
     initialValues: {
-      username: "",
-      CMND: "",
-      address: "",
-      phone: "",   
-      email:"",
-      password: "",
-      confirmPassword: "",
+        username: '',
+        password: '',
+        confirmPassword: '',
+        CMND: '',
+        address: '',
+        phone: '',
+        email: '',
+        birthDate: null,
+        gender: null,
+        role: "0",
     },
     onSubmit: (values) => {
-      console.log("oke")
       fetchRegister(
-        values.username,        
+        values.username,
+        values.password,
+        values.confirmPassword,
         values.CMND,
         values.address,
-        values.phone,   
+        values.phone,
         values.email,
-        values.password
+        values.birthDate,
+        values.gender,
+        values.role,      
       )
         .then(() => {
           setSuccessModalVisible(true);
@@ -116,7 +123,41 @@ const Register = (props) => {
             </Form.Control.Feedback>
           </Form.Group>
 
-           {/* CMND */}
+
+           {/* số điện thoại */}
+          <Form.Group controlId="formPhone" className="text-left">
+            <Form.Label>Số điện thoại</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={formik.handleChange}
+              name="phone"
+              value={formik.values.phone}
+              isInvalid={formik.errors.phone}
+              placeholder="Nhập số điện thoại"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.phone}
+            </Form.Control.Feedback>
+          </Form.Group>
+
+           {/* email */}
+          <Form.Group controlId="formEmail" className="text-left">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              onChange={formik.handleChange}
+              name="email"
+              value={formik.values.email}
+              isInvalid={formik.errors.email}
+              placeholder="Nhập email"
+            />
+            <Form.Control.Feedback type="invalid">
+              {formik.errors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
+          {formik.values.role == 1 && (
+            <>
+               {/* CMND */}
           <Form.Group controlId="formCMND" className="text-left">
             <Form.Label>CHứng minh nhân dân</Form.Label>
             <Form.Control
@@ -147,38 +188,45 @@ const Register = (props) => {
               {formik.errors.address}
             </Form.Control.Feedback>
           </Form.Group>
-
-           {/* số điện thoại */}
-          <Form.Group controlId="formPhone" className="text-left">
-            <Form.Label>Số điện thoại</Form.Label>
+          {/* birthDate */}
+          <Form.Group controlId="formBirthDate" className="text-left">
+            <Form.Label>Ngày sinh</Form.Label>
             <Form.Control
-              type="text"
+              type="Date"
               onChange={formik.handleChange}
-              name="phone"
-              value={formik.values.phone}
-              isInvalid={formik.errors.phone}
-              placeholder="Nhập số điện thoại"
+              name="birthDate"
+              value={formik.values.birthDate}
+              isInvalid={formik.errors.birthDate}
+              placeholder="Nhập ngày sinh"
             />
             <Form.Control.Feedback type="invalid">
-              {formik.errors.phone}
+              {formik.errors.birthDate}
             </Form.Control.Feedback>
-          </Form.Group>
-
-           {/* email */}
-          <Form.Group controlId="formEmail" className="text-left">
-            <Form.Label>Email</Form.Label>
+          </Form.Group>      
+            </>
+          )}
+              
+          
+          {/* gender */}
+          <Form.Group controlId="formGender" className="text-left">
+            <Form.Label>Giới tính</Form.Label>
             <Form.Control
-              type="text"
+              as="select"
+              className="mr-sm-2"
+              id="inlineFormCustomSelect"
+              custom
               onChange={formik.handleChange}
-              name="email"
-              value={formik.values.email}
-              isInvalid={formik.errors.email}
-              placeholder="Nhập email"
-            />
+              name="gender"
+              value={formik.values.gender}
+              isInvalid={formik.errors.gender}
+            >
+                <option value="0">Nam</option>
+                <option value="1">Nữ</option>
+              </Form.Control>
             <Form.Control.Feedback type="invalid">
-              {formik.errors.email}
+              {formik.errors.gender}
             </Form.Control.Feedback>
-          </Form.Group>
+          </Form.Group>              
 
           {/* Mật khẩu */}
           <Form.Group controlId="formBasicPassword" className="text-left">
@@ -216,7 +264,7 @@ const Register = (props) => {
           </Form.Group>
 
           
-         
+         <div>
           <Button
             className="m-color border-none"
             type="submit"
@@ -225,6 +273,7 @@ const Register = (props) => {
           >
             {registerApiData.loading ? "Đang đăng ký" : "Đăng ký"}
           </Button>
+        </div>
           <Form.Label>
             Bạn đã có tài khoản? &nbsp;
             <span className="link" onClick={props.onMoveToLogin}>

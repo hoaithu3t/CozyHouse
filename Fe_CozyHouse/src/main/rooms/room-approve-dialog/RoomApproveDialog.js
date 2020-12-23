@@ -40,12 +40,12 @@ export function RoomApproveDialog({ id, show, onHide }) {
       {isLoading && <ModalProgressBar variant="query" />}
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Duyệt khách hàng
+          Duyệt bài đăng
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {!isLoading && <span>Bạn có chắc chắn duyệt thông tin khách hàng này không?</span>}
-        {isLoading && <span>Đang duyệt khách hàng</span>}
+        {!isLoading && <span>Bạn có chắc chắn duyệt bài đăng này không?</span>}
+        {isLoading && <span>Đang duyệt bài đăng</span>}
       </Modal.Body>
       <Modal.Footer>
         <div>
@@ -60,7 +60,7 @@ export function RoomApproveDialog({ id, show, onHide }) {
             type="button"
             onClick={approveRoom}
             className="btn btn-success btn-elevate">
-            Duyệt khách hàng
+            Duyệt bài đăng
           </button>
         </div>
       </Modal.Footer>

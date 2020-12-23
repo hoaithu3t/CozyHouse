@@ -52,15 +52,15 @@ const Header = () => {
   const moveToDashboard = () => {
     history.push("/dashboard");
   };
-  useEffect(() => {
-    fetchSearchSetCard(value)
-      .then((setCard) => {
-        console.log(setCard);
-      })
-      .catch((e) => {
-        console.log(e.message);
-      });
-  }, [value]);
+  // useEffect(() => {
+  //   fetchSearchSetCard(value)
+  //     .then((setCard) => {
+  //       console.log(setCard);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e.message);
+  //     });
+  // }, [value]);
 
   return (
     <>

@@ -7,9 +7,9 @@ import { RoomStatus } from '../../RoomsUIHelpers';
 export function StatusRoomColumnFormatter(cellContent, row) {
   return (
     <>
-      <span>
-        {RoomStatus[row.roomStatus]}
-      </span>
+      {
+          row.status == 0 ? "NotApprove" : (row.status == 1 ? "Approve" :(row.status == 2 ? "Reject" : ""))
+      }
     </>
   );
 }

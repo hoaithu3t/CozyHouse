@@ -4,7 +4,7 @@ import { roomsSlice, callTypes } from './roomsSlice';
 
 const { actions } = roomsSlice;
 
-export const fetchAllRooms = (queryParams, token) => (dispatch) => {
+export const fetchAllRooms = (token) => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .getAllRooms(token)
@@ -18,11 +18,9 @@ export const fetchAllRooms = (queryParams, token) => (dispatch) => {
     });
 };
 
-export const fetchRooms = (queryParams) => (dispatch) => {
+export const fetchRooms = (queryParams, token) => (dispatch) => {
   const newParams = {
-    filterName: queryParams.filter.name,
-    filterFromDate: queryParams.filter.fromDate,
-    filterToDate: queryParams.filter.toDate,
+    filterTitle: queryParams.filter.title,
     filterRoomStatus: queryParams.filter.roomStatus,
     sorting: `${queryParams.sortField} ${queryParams.sortOrder}`,
     skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
@@ -30,11 +28,32 @@ export const fetchRooms = (queryParams) => (dispatch) => {
   };
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
-    .findRooms(newParams)
+    .findRooms(newParams, token)
     .then((response) => {
-      const { totalCount, items } = response.data;
+      const { totalCount, room } = response.data;
       
-      dispatch(actions.roomsFetched({ totalCount, entities: items }));
+      dispatch(actions.roomsFetched({ totalCount, entities: room }));
+    })
+    .catch((error) => {
+      error.clientMessage = "Can't find rooms";
+      dispatch(actions.catchError({ error, callType: callTypes.list }));
+    });
+};
+
+export const fetchRoomsFilter = (queryParams) => (dispatch) => {
+  const newParams = {
+    filterTitle: queryParams.filter.title,
+    filterRoomStatus: queryParams.filter.roomStatus,
+    skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
+    maxResultCount: queryParams.pageSize,
+  };
+  dispatch(actions.startCall({ callType: callTypes.list }));
+  return requestFromServer
+    .findRoomsFilter(newParams)
+    .then((response) => {
+      const { totalCount, room } = response.data;
+      
+      dispatch(actions.roomsFetched({ totalCount, entities: room }));
     })
     .catch((error) => {
       error.clientMessage = "Can't find rooms";

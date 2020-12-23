@@ -10,6 +10,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../redux/rooms/roomsActions';
 import { isEqual } from 'lodash';
+import moment from 'moment';
 
 import {
   getSelectRow,
@@ -72,10 +73,11 @@ export function RoomsTable() {
   useEffect(() => {
     // clear selections list
     // roomsUIProps.setIds([]);
-    dispatch(actions.fetchAllRooms(roomsUIProps.queryParams, authUser?.token));
+    dispatch(actions.fetchRooms(roomsUIProps.queryParams, authUser?.token));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomsUIProps.queryParams, dispatch, authUser]);
 
+  let timeNow = Date.now();
   // Table columns
   const columns = [
     {
@@ -86,31 +88,31 @@ export function RoomsTable() {
       headerSortingClasses,
     },
     {
-      dataField: 'description',
-      text: "Thông tin",
+      dataField: 'title',
+      text: "Tiêu đề",
       sort: false,
       sortCaret: sortCaret,
     },
     {
       dataField: 'typeOfRoom',
       text: "Loại phòng",
-      sort: true,
+      formatter: columnFormatters.RoomTypeColumnFormatter,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
       dataField: 'status',
       text: "Trạng thái",
-      sort: true,
+      formatter: columnFormatters.StatusRoomColumnFormatter,
       sortCaret: sortCaret,
-      headerSortingClasses,
     },
     {
-      dataField: 'timeRemain',
-      text: "Thời gian còn lại",
-      sort: true,
-      sortCaret: sortCaret,
-      headerSortingClasses,
+      dataField: 'date_create',
+      text: "Ngày tạo",
+      formatter: (cellContent) => {
+        return cellContent
+          ? moment(cellContent.creationTime).format('DD/MM/yyyy')
+          : timeNow;
+      },
     },
     {
       dataField: 'action',

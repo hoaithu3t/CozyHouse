@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import withAuth from "../../hoc/authHoc";
 // import authCtx from "../../contexts/auth";
 // import ReactLoading from "react-loading";
@@ -17,8 +17,18 @@ import cover from "./cover.png";
 const Dashboard = () => {
   return (
     <>
-      <img src= {cover} width = "100%" />   
+      <div className = "search-home">
+        <img src={cover} width="100%" />
+        <button className = "btn btn-search-home" >
+           <Link to="/room_list" className="p-2 io" block>
+            <i class="material-icons icon"></i>
+            Tìm kiếm nhà trọ
+          </Link>
+        </button>
+      </div>
+      
       <div className="container">
+
         {/* loai nha */}
         <div className="row p-3 m-4 text-white text-center" style = {{backgroundColor: "#DB647E" , borderRadius: "10px"}}>
           <div className ="col-sm">
@@ -36,16 +46,27 @@ const Dashboard = () => {
         <div>
           <h3>Quanh đây</h3>
           <div className="row p-3 m-4 text-white text-center" >            
-            <div className ="col-sm-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Chung cư
-            </div>
-            <div className ="col-sm-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Nhà nguyên căn
-            </div>
-            <div className="col-sm-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
               Nhà trọ
             </div>
+            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Chung cư mini
+            </div>
+            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Nhà nguyên căn
+            </div>
+            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Chung cư nguyên căn
+            </div>
         </div>
+        </div>
+
+        {/* Tiêu biểu */}
+        <div>
+          <h3>Phòng được xem nhiều nhất</h3>
+          {
+            
+          }
         </div>
       
       </div>

@@ -11,6 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.search-home{
+  position: relative;
+}
+.btn-search-home{
+  position: absolute;
+  top:50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+}
 
 .App {
   height: 100vh;

@@ -9,7 +9,9 @@ import ReactLoading from "react-loading";
 import AuthContext from "./contexts/auth";
 import { useAsync } from "react-hook-async";
 import { Dashboard } from "./components/dashboard";
-import RoomList from "./components/room_list/RoomList";
+// import RoomList from "./components/room_list/RoomList";
+import {RoomsList} from "./main/rooms/room-list/RoomsList"
+
 import PostDetail from "./components/post_detail/PostDetail";
 
 import { me } from "./api/profile";
@@ -18,6 +20,8 @@ import Profile from "./components/setting/profile";
 import Auth from "./components/auth/index";
 import Customer from "./main/customers/Customers"
 import Rooms from "./main/rooms/Rooms"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [authUser, setAuthUser] = useState(null);
@@ -56,12 +60,14 @@ function App() {
           <Route path="/auth" component={Auth} />
           <Route path="/profile" component={Profile} />
 
-          <Route path="/room_list" component={RoomList} />
+          {/* <Route path="/room_list" component={RoomList} /> */}
+          <Route path="/room_list" component={RoomsList} />
           <Route path="/post_detail" component={PostDetail} />
           <Route path="/customer" component={Customer} />
           <Route path="/rooms" component={Rooms} />
         </Switch>
         <Footer />
+        <ToastContainer position="top-center" />
       </div>
     </AuthContext.Provider>
   );

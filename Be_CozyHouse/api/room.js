@@ -5,17 +5,19 @@ const {
   updateRoom,
   deleteRoom,
   getListRoom,
+  getDetailRoom,
   approveRoom,
   rejectRoom,
   changeAvailabilityRoom,
   reportRoom,
   searchRoom,
+  findRoom,
 } = require("../services/room");
 
 const router = require("express").Router();
 
 router.post("/", authMdw(), (req, res) => {
-  createRoom(req.user, req.body).then((room) => res.json(room));
+  createRoom(req.user, req.body.querys).then((room) => res.json(room));
 });
 
 router.get("/", authMdw({ optional: false }), (req, res) => {
@@ -24,13 +26,24 @@ router.get("/", authMdw({ optional: false }), (req, res) => {
   });
 });
 
-router.post("/search", authMdw({ optional: true }), (req, res) => {
-  searchRoom(req.body.title).then((rooms) => res.json(rooms));
+router.post("/find",authMdw(), (req, res) => {
+    findRoom(req.user, req.body).then((result) => {
+    res.json(result);
+  });
 });
 
-router.get("/:id", (req, res) => {
+router.get("/search", (req, res) => {
+  searchRoom(req).then((rooms) => res.json(rooms));
+});
+
+router.get("/:id",authMdw({ optional: true }), (req, res) => {
   const { id } = req.params;
   getRoom(id).then((room) => res.json(room));
+});
+
+router.get("detail/:id",authMdw({ optional: false }), (req, res) => {
+  const { id } = req.params;
+  getDetailRoom(id).then((room) => res.json(room));
 });
 
 router.put("/:id", authMdw(), (req, res) => {

@@ -28,8 +28,7 @@ export const sizePerPageList = [
 ];
 export const initialFilter = {
   filter: {
-    name: '',
-    email: '',
+    title: '',
     roomStatus: undefined,
   },
   sortOrder: 'ASC', // ASC|DESC
