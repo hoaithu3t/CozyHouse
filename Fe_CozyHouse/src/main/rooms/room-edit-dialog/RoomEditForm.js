@@ -22,7 +22,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { kitchenType, Gender, RoomStatus, timeRemainType } from '../RoomsUIHelpers';
+import { kitchenType, Gender, RoomStatus, timeRemainType, TypeOfRoom } from '../RoomsUIHelpers';
 // import { usePermission } from '../../../../hooks/UsePermission';
 import { uploadFile } from "../../../api/file";
 import authCtx from "../../../contexts/auth";
@@ -39,7 +39,7 @@ export function RoomEditForm({
   disabled,
 }) {
 
-  const { authUser, setAuthUser } = useContext(authCtx);
+  const { authUser } = useContext(authCtx);
   const [linksImg, setLinksImg] = useState([]);
 
 
@@ -47,12 +47,14 @@ export function RoomEditForm({
 
   // Validation schema
   const RoomEditSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(3, "Tối thiểu 3 ký tự")
-      .max(50, "Tối đa 50 ký tự"),
-    email: Yup.string(),
-    phone: Yup.string(),
-    socialIdOrBusinessLicense: Yup.string(),
+    title: Yup.string().required("Chưa nhập tiêu đề"),
+    address: Yup.string().required("Chưa nhập địa chỉ"),
+    typeOfRoom: Yup.number().required("Chưa chọn kiểu phòng"),
+    numberOfRoom: Yup.number("Chỉ nhập kiểu số").required("Chưa nhập số phòng"),
+    price: Yup.string().required("Chưa nhập số phòng"),
+    rentalTime: Yup.string().required("Chưa nhập thời gian thuê phòng"),
+    area: Yup.number("Chỉ nhập kiểu số"),
+    inputTimeRemain: Yup.number("Chỉ nhập kiểu số"),
   });
 
   const [uploadFileApi, callUploadFileApi] = useAsync(null, uploadFile);
@@ -73,21 +75,8 @@ export function RoomEditForm({
         setLinksImg(newLinksImg)
         return setFieldValue(`photoUrl${i}`, res.data)
       });
-    }
-    console.log(linksImg)
-    // files.forEach((fileImg, i) => {
-    //   callUploadFileApi(fileImg, authUser.token).then((res) => {
-    //     return setFieldValue(`photoUrl${i}`, res.data)
-    //   });
-    // })
-  
-    // callUploadFileApi(event.target.files[0], authUser.token).then((res) => {      
-    //   return setFieldValue("photoUrl", res.data)
-    // }
-    // );
+    }    
   };
-  
-
 
   const getRentCost = (number, time) => {
     let cost;
@@ -114,11 +103,12 @@ export function RoomEditForm({
         initialValues={room}
         validationSchema={RoomEditSchema}
         onSubmit={(values) => {
-          console.log(values)
           values.photoUrl = linksImg;
+          if(linksImg.length < 1) toast.error("Chưa chọn ảnh cho phòng")
           saveRoom(values);
         }}>
-        {({ handleSubmit, values, setFieldValue }) => (
+        
+        {({ handleSubmit, values, setFieldValue, errors }) => (
           <>
             <Modal.Body className="overlay overlay-block cursor-default">
               {actionsLoading && (
@@ -128,9 +118,8 @@ export function RoomEditForm({
               )}
               <Form className="form form-label-right">
               
-                <div>
-                  
                   {/* Title */}
+                <div>                  
                   <div>
                     <Field
                       type="text"
@@ -147,16 +136,29 @@ export function RoomEditForm({
                       disabled={disabled}
                     />           
                   </div>                   
+                </div>  
+                  {/* Mô tả */}
+                <div>                  
+                  <div>
+                    <Field
+                      type="text"
+                      name="description"
+                      component={Input}
+                      placeholder="Mô tả"
+                      label= "Mô tả"
+                      withFeedbackLabel={true}
+                      disabled={disabled}
+                    />           
+                  </div>                   
                 </div>
-                      {/* Địa chỉ */}
-                 <div >
-                  
-                  {/* Địa chỉ */}
+
+                {/* Địa chỉ */}
+                 <div >                  
                   <div>
                     <Field
                       name="address"
                       component={Input}
-                      placeholder="số nhà- đường (thôn)- phường(thị xã) -quận (huyện)- tỉnh (thành phố)"
+                      placeholder="số nhà - đường (thôn) - phường(thị xã) - quận (huyện)- tỉnh (thành phố)"
                       label={
                         <>
                           Địa chỉ
@@ -196,7 +198,7 @@ export function RoomEditForm({
                             <Field
                               name="typeOfRoom"
                               component={Input}
-                              value={Gender[room.type]}
+                              value={TypeOfRoom[room.type]}
                               label="Loại phòng"
                               disabled={disabled}
                             />
@@ -256,27 +258,19 @@ export function RoomEditForm({
                   <> / </>
                   {/* Tính theo */}
                   <div className="col-lg-3">
-                    {disabled ? (                      
-                            <Field
-                              name="rentalTime"
-                              component={Input}
-                              value={Gender[room.type]}
-                              label="Thời gian thuê"
-                              disabled={disabled}
-                            />
-                        ) : (
-                          <Select name="rentalTime" label="Thời gian">
-                            <option value="0">
-                              1 tháng
-                            </option>
-                            <option value="1">
-                              3 tháng
-                            </option>
-                          <option value="2">
-                              1 năm
-                            </option>
-                          </Select>
-                        )}
+                   <Field
+                      name="rentalTime"
+                      component={Input}
+                      placeholder="1 tháng"
+                      label={
+                        <>
+                          Thời gian thuê
+                          <span className="text-danger"> * </span>
+                        </>
+                      }
+                      withFeedbackLabel={true}
+                      disabled={disabled}
+                    /> 
                   </div>  
                    <div className="col-lg-4">
                     <Field
@@ -299,22 +293,24 @@ export function RoomEditForm({
                 <div >Phòng tắm</div>
                 <div className="form-group row ml-2">
                   {/* phòng tắm */}
+
                   <div className="col-lg-6">
                     <Field
-                    type="checkbox"
-                    name="bathroom"
+                      type="checkbox"
+                      name="bathroom"
                       className="mr-2"
                       disabled = {disabled}
                   />
-                  <span>Khép kín</span>
+                    <span>Khép kín</span>                    
                   </div>  
-                   <div className="col-lg-6">
-                  <Field
-                    type="checkbox"
-                    name="electricWaterHeater"
+
+                  <div className="col-lg-6">
+                    <Field
+                      type="checkbox"
+                      name="electricWaterHeater"
                       className="mr-2"
                       disabled = {disabled}
-                  />
+                    />
                   <span>Có nóng lạnh</span>
                   </div>  
                 </div>
@@ -385,8 +381,8 @@ export function RoomEditForm({
                   <div className = "ml-4">Điện nước:</div>
                   <div className="col-lg-6">                    
                     <Field
-                    type="checkbox"
-                    name="electricWaterPrice"
+                      type="checkbox"
+                      name="electricWaterPrice"
                       className="mr-2"
                       disabled = {disabled}
                   />
@@ -452,6 +448,7 @@ export function RoomEditForm({
                    
                     linksImg.map((el, i) =>
                     <div>
+                         {/* eslint-disable-next-line jsx-a11y/alt-text */}
                         <img
                           src={process.env.REACT_APP_API_DOMAIN + "/" + el}
                           style={{ width: "80px", height: "80px" }}
@@ -489,8 +486,9 @@ export function RoomEditForm({
                 accept="image/png, image/jpeg"
                 onChange={(event) => onChooseImage(event,setFieldValue)}
               />
-            </div>
-            </div>   
+                  </div>                  
+                  
+        </div>   
               </Form>
             </Modal.Body>   
 
@@ -512,13 +510,13 @@ export function RoomEditForm({
                         className="btn btn-light btn-hover-success"
                         onClick={() => approveRoomButtonClick()}>
                         <i className="far fa-check-circle text-success text-hover-white"></i>{' '}
-                        Duyệt khách hàng
+                        Duyệt phòng
                       </button>
                       <button
                         className="btn btn-light btn-hover-danger btn-elevate"
                         onClick={() => rejectRoomButtonClick()}>
                         <i className="far fa-times-circle text-danger text-hover-white"></i>{' '}
-                        Từ chối khách hàng
+                        Từ chối duyệt phòng
                       </button>
                     </>
                   )}
