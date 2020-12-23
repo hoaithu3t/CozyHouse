@@ -20,6 +20,7 @@ export const kitchenType = {
   sharedKitchen : 1,  
   notCooking: 2
 }
+export const TypeOfRoom = ["phòng trọ", "chung cư mimi", "nhà nguyên căn", "chung cư nguyên căn"]
 export const defaultSorted = [{ dataField: 'id', order: 'asc' }];
 export const sizePerPageList = [
   { text: '3', value: 3 },
@@ -39,22 +40,23 @@ export const initialFilter = {
 
 export const initRoom = {
   id: undefined,
-  title: '',
-  address: '',
-  nearbyPlace: '',
-  typeOfRoom: 0,
-  numberOfRoom: '',
-  price: '',
-  rentalTime: '',
-  area: '',
-  bathroom: '',
-  electricWaterHeater: '',
-  kitchen: null,
-  conditioner: null,
-  balcony: null,
-  electricWaterPrice: null,
-  otherUtility: null,
-  inputTimeRemain: '',
-  timeRemain: null,
-  photoUrl: '',
+  title: '', //tiêu đề
+  description: '', //mới thêm
+  address: '', //địa chỉ *số nhà-đường(thôn) - phường - quận - tỉnh
+  nearbyPlace: '',// địa điểm công cộng xung quanh
+  typeOfRoom: 0, // loại phòng trọ/ trung cư mini- vừa chuyển kiểu
+  numberOfRoom: null, // số lượng phòng
+  price: '',// giá phòng
+  rentalTime: '', // thời gian thuê - vừa chuyển kiểu select-> string 
+  area: '', // diện tích
+  bathroom: false, // phòng tắm khép kín
+  electricWaterHeater: false, // nóng lạnh
+  kitchen: 0, // phòng bếp chung, riêng, ko nấu - vừa chuyển kiểu
+  conditioner: false,// điều hòa
+  balcony: false,// ban công
+  electricWaterPrice: null, //giá điện dân
+  otherUtility: null, //tiện ích khác
+  inputTimeRemain: '', // thời gian bài đăng hiển thị
+  timeRemain: 0, //tuần/tháng năm
+  photoUrl: null, // ảnh bài đăng
 };

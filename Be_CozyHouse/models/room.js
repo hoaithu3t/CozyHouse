@@ -7,7 +7,7 @@ const roomSchema = Schema({
     type: String,
     required: true,
   },
-  img: String,
+  img: [String],
   date_create: Date,
   author: {
     type: Schema.Types.ObjectId,
@@ -17,38 +17,34 @@ const roomSchema = Schema({
   username: {
     type: String
   },
-  address: String,
+  address: {
+    type: String,
+    require: true
+  },
   nearbyPlace: String,
-  typeOfRoom: String,
-  numberOfRoom: String,
+  typeOfRoom: Number,
+  numberOfRoom: Number,
   price: Number,
   rentalTime: String,
-  electricPrice: Number,
-  waterPrice: Number,
+  electricWaterPrice: Boolean,
   area: Number,
-
-  equipment: {
-      bathroom: {
-        type: Boolean,
-        require: true,
+    bathroom: {
+      type: Boolean,
+      require: true,
     }, 
     electricWaterHeater: {
       type: Boolean,
       require: true
     },
       kitchen: {
-        type: String,
+        type: Number,
         require: true,
       },
       conditioner: {
-        type: String,
+        type: Boolean,
         require: true,
       },
       balcony: {
-        type: String,
-        require: true,
-      },      
-    electricWaterPrice: {
         type: Boolean,
         require: true,
       },
@@ -56,7 +52,6 @@ const roomSchema = Schema({
         type: String,
         require: true,
       },
-    },
   inputTimeRemain: {//thời gian hiển thị (số)
         type: Number,
         require: true,
@@ -64,15 +59,15 @@ const roomSchema = Schema({
   timeRemain: {//thời gian hiển thị (tuần/tháng/năm)
         type: Number,
         require: true,
-    },
+  },
   status: { //duyệt bài đăng
         type: Number,
         require: true,
-    },
+  },
   availability: { //sẵn sàng cho thuê
         type: Boolean,
         require: true,
-    },
+  },
   expired: { //quá hạn bài đăng
         type: Boolean,
         require: true,

@@ -6,7 +6,7 @@ const ERROR = require("../types/error");
 const createRoom = (user, room) => {
   const newRoom = new Room({
     title: room.title,
-    img: room.avatar,
+    img: room.photoUrl,
     date_create: new Date(),
     author: user._id,
     username: user.username,
@@ -16,15 +16,24 @@ const createRoom = (user, room) => {
     numberOfRoom: room.numberOfRoom,
     price: room.price,
     rentalTime: room.rentalTime,
-    area: room.area,
     electricWaterPrice: room.electricWaterPrice,
-    equipment: room.equipment, //not oke
+    area: room.area,
+    bathroom: room.bathroom,
+    electricWaterHeater: room.electricWaterHeater,
+    kitchen: room.kitchen,
+    conditioner: room.conditioner,
+    balcony: room.balcony,
+    otherUtility: room.otherUtility,
     inputtimeRemain: room.timeRemain,
     timeRemain: room.timeRemain,
     status: 0,
-    availability: room.availability,
-    expired: room.expired,
+    availability: true,
+    expired: false,
     description: room.description,
+    view: 0,
+    vote: 0,
+    report: false,
+    reasonReject: null,    
   });
   newRoom.generateSlug();
   const rootFolderPath = `${path.join(__dirname, "/..")}`;
@@ -33,7 +42,7 @@ const createRoom = (user, room) => {
   fs.mkdirSync(rootFolderPath + postFolderPath, { recursive: true });
   fs.writeFileSync(
     rootFolderPath + postFolderPath + `/${newRoom.slug}.md`,
-    "insert oke"
+    room.description
   );
   newRoom.contentFilePath = postFolderPath + `/${newRoom.slug}.md`;
   return newRoom.save();
