@@ -73,18 +73,22 @@ const getListRoom = async (user) => {
 
 const searchRoom = async (filter) => {
   const { filterTitle, skipCount, maxResultCount } = filter;
+   var totalCount;
+  await Room.find().exec(function (err, results) {    
+    totalCount = results.length
+  });
   const room = await Room
     .find({
        $and: [
         { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
         //  { expired: false }
-         // chưa chỉnh hạn đăng bài
+         // chưa chỉnh hạn đăng bai
       ]
     })  
     .skip(Number(skipCount))
     .limit(Number(maxResultCount))
     .exec();
-  return room;
+  return { totalCount, room };
 };
 
 

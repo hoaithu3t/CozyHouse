@@ -10,14 +10,14 @@ import { Formik } from 'formik';
 
 export function RoomsList() { 
 
-  const { customerFilter } = useSelector(
+  const { roomFilter } = useSelector(
     (state) => ({      
-      customerFilter: state.customers.entities,
+      roomFilter: state.rooms.entities,
     }),
     shallowEqual,
   );
 
-  console.log(customerFilter)
+  console.log(roomFilter)
   const [queryParams, setQueryParams] = useState({
     filter: {
       title: ''
