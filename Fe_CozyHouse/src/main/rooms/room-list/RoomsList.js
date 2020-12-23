@@ -21,11 +21,6 @@ export function RoomsList() {
     }),
     shallowEqual,
   );
-
-  console.log(roomFilter)
-
-  var RoomList 
-
   const [queryParams, setQueryParams] = useState({
     filter: {
       title: ''
@@ -120,7 +115,7 @@ export function RoomsList() {
                     roomFilter && roomFilter.map(room => {
                       var {_id, address, area, numberOfRoom, price, title } = room;
                       return (                        
-                        <RoomItem 
+                        <RoomItem  
                         title={title}
                         location={address}
                         price={price}

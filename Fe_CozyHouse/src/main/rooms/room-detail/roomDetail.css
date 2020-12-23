@@ -1,0 +1,18 @@
+p {
+  margin: 0px !important;
+  padding: 0px;
+}
+
+.avatar {
+  width: 60px;
+  border-radius: 50%;
+}
+
+.content {
+  border-bottom: 1px solid gray;
+  width: 67%;
+}
+
+.header-content {
+  display: flex;
+}
