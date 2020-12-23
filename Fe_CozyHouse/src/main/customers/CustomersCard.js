@@ -26,14 +26,15 @@ export function CustomersCard() {
 
   return (
     <Card>
-      <CardHeader title= "Danh sách khách hàng">
+      <CardHeader classname= "cardHeader"><h2 className="header-card">Danh sách khách hàng</h2>
         <CardHeaderToolbar>
           {/* {hasCreatePermission && ( */}
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn button_add"
               onClick={customersUIProps.newCustomerButtonClick}>
               Tạo mới khách hàng
+              <span ><i class="plus_button fas fa-plus-circle"></i></span>
             </button>
           {/* )} */}
         </CardHeaderToolbar>

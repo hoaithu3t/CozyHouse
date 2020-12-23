@@ -56,7 +56,7 @@ const Avatar = ({ size, src }) => {
           Rooms
           </Link>
           <a
-            href="https://www.facebook.com/groups/441154729911930/"
+            href="https://uet.vnu.edu.vn/"
             className="p-2 io"
           >
             <i class="material-icons icon">live_help</i> Help Center

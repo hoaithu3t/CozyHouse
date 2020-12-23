@@ -255,16 +255,16 @@ export function RoomEditForm({
                     <Field
                       name="area"
                       component={Input}
-                      placeholder="Diện tích"
+                      placeholder="Diện tích (m²)"
                       label={
                         <>
-                          Diện tích
+                          Diện tích (m²)
                           <span className="text-danger"> * </span>
                         </>
                       }
                       withFeedbackLabel={true}
                       disabled={disabled}
-                    />     
+                    />    
                     </div>
                 </div>
 

@@ -33,7 +33,7 @@ const createRoom = (user, room) => {
   fs.mkdirSync(rootFolderPath + postFolderPath, { recursive: true });
   fs.writeFileSync(
     rootFolderPath + postFolderPath + `/${newRoom.slug}.md`,
-    room.content
+    "insert oke"
   );
   newRoom.contentFilePath = postFolderPath + `/${newRoom.slug}.md`;
   return newRoom.save();
@@ -47,7 +47,6 @@ const findRoom = async (user, filter) => {
     totalCount = results.length
   });
   var room = await Room
-  .aggregate()
     .find({
        $and: [
       { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}},

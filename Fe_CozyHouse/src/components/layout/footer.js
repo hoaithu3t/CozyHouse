@@ -19,8 +19,8 @@ const Footer = () => {
 
       
       <div className="aboutUse">
-        <h2>CozyHome</h2>
-        <p>Nâng tầm trải nghiệm tìm nhà</p>
+        <div className="cosyHome"><h2>CozyHome</h2></div>
+        <div className="enhance"><p>Nâng tầm trải nghiệm tìm nhà</p></div>
       </div>
       <div className="founder">
         <h4>Our Team</h4>

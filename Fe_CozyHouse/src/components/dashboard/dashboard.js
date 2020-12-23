@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 // import authCtx from "../../contexts/auth";
 // import ReactLoading from "react-loading";
 // import { useAsync } from "react-hook-async";
-// import "../../scss/dashboard.scss";
+import "../../scss/dashboard.scss";
+import "../../css/index.css";
 import cover from "./cover.png";
 // import { Container } from "react-bootstrap";
 
@@ -19,32 +20,44 @@ const Dashboard = () => {
     <>
       <div className = "search-home">
         <img src={cover} width="100%" />
-        <button className = "btn btn-search-home" >
-           <Link to="/room_list" className="p-2 io" block>
-            <i class="material-icons icon"></i>
-            Tìm kiếm nhà trọ
-          </Link>
-        </button>
+        <div className = "btn-search-home">
+          <div className="title_search_home">Phòng trọ gần nhà</div>
+          <button className = "btn" >
+            <Link to="/room_list" className="p-2 io discover" block>
+              <span className ="explore">
+                Khám phá ngay
+              </span>
+            </Link>
+          </button>
+        </div>
+        
       </div>
       
       <div className="container">
 
         {/* loai nha */}
         <div className="row p-3 m-4 text-white text-center" style = {{backgroundColor: "#DB647E" , borderRadius: "10px"}}>
-          <div className ="col-sm">
-            Chung cư
+          <div className ="col-sm-2 col-xl">
+          <i class="fas fa-home"></i>
+            Nhà trọ
           </div>
-          <div className="col-sm">
+          <div className="col-sm col-xl">
+          <i class="far fa-building"></i>
+            Chung cư mini
+          </div>
+          <div className="col-sm col-xl">
+          <i class="fas fa-laptop-house"></i>
             Nhà nguyên căn
           </div>
-          <div className="col-sm">
-            Nhà trọ
+          <div className="col-sm-4 col-xl">
+          <i class="fas fa-city"></i>
+            Chung cư nguyên căn
           </div>
         </div>
 
         {/* Khu vuc */}
         <div>
-          <h3>Quanh đây</h3>
+          <div className= "near"><h3>Quanh đây</h3></div>
           <div className="row p-3 m-4 text-white text-center" >            
             <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
               Nhà trọ
@@ -58,12 +71,26 @@ const Dashboard = () => {
             <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
               Chung cư nguyên căn
             </div>
-        </div>
+          </div>
+          <div className="row p-3 m-4 text-white text-center" >            
+            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Nhà trọ
+            </div>
+            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Chung cư mini
+            </div>
+            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Nhà nguyên căn
+            </div>
+            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
+              Chung cư nguyên căn
+            </div>
+          </div>
         </div>
 
         {/* Tiêu biểu */}
         <div>
-          <h3>Phòng được xem nhiều nhất</h3>
+          <div className="best"><h3>Phòng được xem nhiều nhất</h3></div>
           {
             
           }
