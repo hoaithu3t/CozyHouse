@@ -71,47 +71,16 @@ const Dashboard = () => {
         </div>
 
         {/* Khu vuc */}
-        <div>
-          <div className= "near"><h3>Quanh đây</h3></div>
-          <div className="row p-3 m-4 text-white text-center" >            
-            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Nhà trọ
-            </div>
-            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Chung cư mini
-            </div>
-            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Nhà nguyên căn
-            </div>
-            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Chung cư nguyên căn
-            </div>
-          </div>
-          <div className="row p-3 m-4 text-white text-center" >            
-            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Nhà trọ
-            </div>
-            <div className ="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Chung cư mini
-            </div>
-            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Nhà nguyên căn
-            </div>
-            <div className="col m-2 p-3" style = {{backgroundColor: "#FA9CA5" , borderRadius: "10px"}}>
-              Chung cư nguyên căn
-            </div>
-          </div>
-        </div>
+      
 
         {/* Tiêu biểu */}
-        <div>
           <div className="best">
             <h3>Phòng được xem nhiều nhất</h3>
           </div>
-          <div className = "row">          
+          <div className = "row p-3 m-4 text-white text-center">          
           {
             allRooms && allRooms.map(room => {
-                      var {_id, address, area, numberOfRoom, price, title } = room;
+                var {_id, address, area, numberOfRoom, price, title, img } = room;
                       return (                        
                         <RoomItem 
                         title={title}
@@ -119,16 +88,16 @@ const Dashboard = () => {
                         price={price}
                         area={area}
                         number_of_room={numberOfRoom}
-                        onClick = {() => remoteToDetail(_id)}
+                          onClick={() => remoteToDetail(_id)}
+                        img = {img}
                         />
                       )
                     }
                     )
             }
             </div>
-        </div>
+            </div>
       
-      </div>
 
       
     </>

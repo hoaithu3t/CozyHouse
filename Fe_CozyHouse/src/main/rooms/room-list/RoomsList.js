@@ -227,7 +227,7 @@ export function RoomsList() {
       <div className="roomlist-container">
       {
                     roomFilter && roomFilter.map(room => {
-                      var {_id, address, area, numberOfRoom, price, title } = room;
+                      var {_id, address, area, numberOfRoom, price, title,img } = room;
                       return (                        
                         <RoomItem  
                         title={title}
@@ -235,6 +235,7 @@ export function RoomsList() {
                         price={price}
                         area={area}
                         number_of_room={numberOfRoom}
+                        img = {img}
                         onClick = {() => remoteToDetail(_id)}
                         />
                       )

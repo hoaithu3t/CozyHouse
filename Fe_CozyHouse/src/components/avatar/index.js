@@ -39,13 +39,10 @@ const Avatar = ({ size, src }) => {
       >
         <PopoverHeader>@{authUser.user.username}</PopoverHeader>
         <PopoverBody className="d-flex flex-column p-0 " onClick={onClosePop}>
-          <Link to="/setting" className="p-2 io" block>
-            <i class="material-icons icon">settings</i>
-            Setting
-          </Link>
+         
           <Link to="/profile" className="p-2 io">
             <i class="material-icons icon">person</i> 
-            Profile
+            ChangeAvata
           </Link>
           <Link to="/customer" className="p-2 io">
           <i class="fas fa-user-friends material-icons icon"></i>
@@ -60,10 +57,7 @@ const Avatar = ({ size, src }) => {
             className="p-2 io"
           >
             <i class="material-icons icon">live_help</i> Help Center
-          </a>
-          <Link to="/profile" className="p-2 io">
-            <i class="material-icons icon">settings_brightness</i> Night Mode
-          </Link>
+          </a>         
           <Link className=" p-2 io" onClick={onClickLogOut}>
             <i class="material-icons icon">power_settings_new</i>
             Logout

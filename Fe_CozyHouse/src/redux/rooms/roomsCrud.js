@@ -16,7 +16,7 @@ export function getAllRooms(token) {
   return axios.get(ROOM_URL,
     {
       headers: {
-        Authorization: "Bearer " + token,
+        "Authorization": "Bearer " + token,
       },
     }
   );

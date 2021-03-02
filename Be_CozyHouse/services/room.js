@@ -91,14 +91,8 @@ const searchRoom = async (filter) => {
         { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
         { address: { $regex: new RegExp(`.*${filterAddress}.*`), $options: "i" } },
         { nearbyPlace: { $regex: new RegExp(`.*${filterNearbyPlace}.*`), $options: "i" } },
-        // { price: { $regex: new RegExp(`.*${filterPrice}.*`), $options: "i" } },
-        // { area: { $regex: new RegExp(`.*${filterArea}.*`), $options: "i" } },
-        //  { expired: false }
-         // chưa chỉnh hạn đăng bai
       ]
-    })  
-    // .skip(Number(skipCount))
-    // .limit(Number(maxResultCount))
+    }) 
     .exec();
   return { totalCount, room };
 };

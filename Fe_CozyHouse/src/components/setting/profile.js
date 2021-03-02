@@ -42,7 +42,7 @@ const Profile = () => {
     <>
       <Container className="my-5">
         <h3 className="display-4">
-          Profile: <span className="code">{authUser.user.username}</span>
+          Avata: <span className="code">{authUser.user.username}</span>
         </h3>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
@@ -75,25 +75,7 @@ const Profile = () => {
             </div>
           </Form.Group>
 
-          <Form.Group>
-            <Form.Label className="code">Bio</Form.Label>
-            <Form.Control
-              type="text"
-              name="bio"
-              value={formik.values.bio}
-              onChange={formik.handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label className="code">Education</Form.Label>
-            <Form.Control
-              type="text"
-              name="education"
-              value={formik.values.education}
-              onChange={formik.handleChange}
-            />
-          </Form.Group>
+         
           <Form.Group>
             <Button className="code color-pink" type="submit">
               Submit

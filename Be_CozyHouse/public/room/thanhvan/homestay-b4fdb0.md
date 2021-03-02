@@ -1,0 +1,1 @@
+Dự án: Cửa hàng cho thuê mặt phố Lê Duẩn , Cửa Nam , Hoàn Kiếm , Hà Nội. Thông tin chi tiết: Cửa hàng cho thuê mặt phố Lê Duẩn , Cửa Nam , Hoàn Kiếm , Hà Nội cho thuê 18m2 Mặt phố để xe rộng rãi . Cho thuê , không ngủ tối lại cửa hàng Không kinh doanh ăn uống Giá thuê 5.000.000 vnđ / tháng Liên hệ trực tiếp chính chủ cho thuê , trung gian môi giới vui lòng không liên hệ

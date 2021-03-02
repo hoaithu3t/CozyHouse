@@ -1,4 +1,6 @@
 import axios from "../config/axios";
+import { toast } from 'react-toastify';
+
 
 export const me = (token) =>
   axios
@@ -18,4 +20,9 @@ export const updateMe = (token, payload) =>
         Authorization: "Bearer " + token,
       },
     })
-    .then((res) => res.data);
+    .then((res) => {
+      toast.success('Thay đổi ảnh thành công');
+      return res.data
+    })
+    .catch((err) => toast.error('Không thể kết nối server'))
+      
