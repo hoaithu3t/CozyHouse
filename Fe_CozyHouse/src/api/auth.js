@@ -8,22 +8,22 @@ export const login = (username, password) =>
       password,
     })
     .then((res) => {
-      toast.success('Đăng nhập thành công');
+      toast.success('Logged in successfully');
       return res.data
     }
       )
     .catch((err) =>
     {
       if (err.response === undefined) {
-        toast.error('Không thể kết nối server');
+        toast.error('Cannot connect server');
       }
       else {
          switch (err.response.status) {
             case 401:
-              toast.error('Tên đăng nhập hoặc mật khẩu không tồn tại');
+              toast.error('Username or password does not exist');
               break;       
             default:
-              toast.error('Có một lỗi sảy ra trong quá trình đăng nhập');
+              toast.error('There was an error logging in');
         }
       }
     }
@@ -33,22 +33,22 @@ export const register = (username, password, CMND, address, phone, email, birthD
   axios
     .post("/auth/register", {username, password, CMND, address, phone, email, birthDate, gender, role})
     .then((res) => {
-      toast.success('Đăng ký thành công');
+      toast.success('Sign Up Success');
       return res.data
     }
       )
     .catch((err) =>
     {
       if (err.response === undefined) {
-        toast.error('Không thể kết nối server');
+        toast.error('Cannot connect server');
       }
       else {
          switch (err.response.status) {
             case 409:
-              toast.error('Tên đăng nhập đã tồn tại');
+              toast.error('Username available');
               break;       
             default:
-              toast.error('Có một lỗi sảy ra trong quá trình đăng nhập');
+              toast.error('An error occurred during registration');
         }
       }
     }

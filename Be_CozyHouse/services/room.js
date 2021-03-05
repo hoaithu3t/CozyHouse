@@ -31,9 +31,9 @@ const createRoom = (user, room) => {
     expired: false,
     description: room.description,
     view: 0,
-    vote: 0,
+    like: [],
     report: false,
-    reasonReject: null,    
+    reasonReject: null,
   });
   newRoom.generateSlug();
   const rootFolderPath = `${path.join(__dirname, "/..")}`;
@@ -49,26 +49,32 @@ const createRoom = (user, room) => {
 };
 
 const findRoom = async (user, filter) => {
-  const { filterTitle, skipCount, maxResultCount, filterRoomStatus } = filter.querys;
+  const {
+    filterTitle,
+    skipCount,
+    maxResultCount,
+    filterRoomStatus,
+  } = filter.querys;
 
   var totalCount;
-  await Room.aggregate().match({ author: user._id }).exec(function (err, results) {    
-    totalCount = results.length
-  });
-  var room = await Room
-    .find({
-       $and: [
-      { title: {$regex: new RegExp(`.*${filterTitle}.*`), $options: "i"}},
+  await Room.aggregate()
+    .match({ author: user._id })
+    .exec(function (err, results) {
+      totalCount = results.length;
+    });
+  var room = await Room.find({
+    $and: [
+      { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
       { author: user._id },
-      ]
-    })  
+    ],
+  })
     .skip(Number(skipCount))
     .limit(Number(maxResultCount))
     .exec();
   if (filterRoomStatus !== undefined) {
-   room = room.filter(r => r.status === Number(filterRoomStatus))
+    room = room.filter((r) => r.status === Number(filterRoomStatus));
   }
-  return {totalCount, room };
+  return { totalCount, room };
 };
 
 const getListRoom = async (user) => {
@@ -80,34 +86,53 @@ const getListRoom = async (user) => {
 };
 
 const searchRoom = async (filter) => {
-  const { filterTitle, skipCount, maxResultCount, filterAddress, filterNearbyPlace, filterPrice, filterArea } = filter;
-   var totalCount;
-  await Room.find().exec(function (err, results) {    
-    totalCount = results.length
+  const {
+    filterTitle,
+    skipCount,
+    maxResultCount,
+    filterAddress,
+    filterNearbyPlace,
+    filterPrice,
+    filterArea,
+  } = filter;
+  var totalCount;
+  await Room.find().exec(function (err, results) {
+    totalCount = results.length;
   });
-  const room = await Room
-    .find({
-       $and: [
-        { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
-        { address: { $regex: new RegExp(`.*${filterAddress}.*`), $options: "i" } },
-        { nearbyPlace: { $regex: new RegExp(`.*${filterNearbyPlace}.*`), $options: "i" } },
-      ]
-    }) 
-    .exec();
+  const room = await Room.find({
+    $and: [
+      { title: { $regex: new RegExp(`.*${filterTitle}.*`), $options: "i" } },
+      {
+        address: { $regex: new RegExp(`.*${filterAddress}.*`), $options: "i" },
+      },
+      {
+        nearbyPlace: {
+          $regex: new RegExp(`.*${filterNearbyPlace}.*`),
+          $options: "i",
+        },
+      },
+    ],
+  }).exec();
   return { totalCount, room };
 };
 
-const getRoomManyView = async() => {
-    const room = await Room.find()
-    .limit(8)
-    .exec();
+const getRoomManyView = async () => {
+  const room = await Room.find().sort({ view: -1 }).limit(8).exec();
   return room;
-}
+};
 
 const getRoom = async (id) => {
   const room = await Room.findOne({
     _id: id,
   });
+  await Room.findOneAndUpdate(
+    { _id: id },
+    { view: room.view + 1 },
+    {
+      new: true,
+    }
+  );
+
   return room;
 };
 
@@ -119,35 +144,51 @@ const updateRoom = async (id, room) => {
 };
 
 const approveRoom = async (id) => {
-  const newRoom = await Room.findOneAndUpdate({ _id: id }, {status: 1}, {
-    new: true,
-  });
+  const newRoom = await Room.findOneAndUpdate(
+    { _id: id },
+    { status: 1 },
+    {
+      new: true,
+    }
+  );
   return newRoom;
 };
 
 const getDetailRoom = async (id) => {
   const rooms = await Room.find({ _id: id, expired: false }).exec();
-  return rooms
-}
+  return rooms;
+};
 
 const rejectRoom = async (id, reason) => {
-  const newRoom = await Room.findOneAndUpdate({ _id: id }, {status: 2, reasonReject: reason}, {
-    new: true,
-  });
+  const newRoom = await Room.findOneAndUpdate(
+    { _id: id },
+    { status: 2, reasonReject: reason },
+    {
+      new: true,
+    }
+  );
   return newRoom;
 };
 
 const changeAvailabilityRoom = async (id) => {
-  const newRoom = await Room.findOneAndUpdate({ _id: id }, {availability: !availability}, {
-    new: true,
-  });
+  const newRoom = await Room.findOneAndUpdate(
+    { _id: id },
+    { availability: !availability },
+    {
+      new: true,
+    }
+  );
   return newRoom;
 };
 
 const reportRoom = async (id) => {
-  const newRoom = await Room.findOneAndUpdate({ _id: id }, {report: true}, {
-    new: true,
-  });
+  const newRoom = await Room.findOneAndUpdate(
+    { _id: id },
+    { report: true },
+    {
+      new: true,
+    }
+  );
   return newRoom;
 };
 
@@ -173,5 +214,5 @@ module.exports = {
   reportRoom,
   getRoomManyView,
   searchRoom,
-  findRoom
+  findRoom,
 };

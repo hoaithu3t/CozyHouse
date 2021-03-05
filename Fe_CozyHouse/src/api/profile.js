@@ -21,8 +21,8 @@ export const updateMe = (token, payload) =>
       },
     })
     .then((res) => {
-      toast.success('Thay đổi ảnh thành công');
+      toast.success('Photo change is successful');
       return res.data
     })
-    .catch((err) => toast.error('Không thể kết nối server'))
+    .catch((err) => toast.error('Cannot connect server'))
       

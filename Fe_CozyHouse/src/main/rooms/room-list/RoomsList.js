@@ -1,42 +1,38 @@
 // React bootstrap table next =>
 // DOCS: https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/
 // STORYBOOK: https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html
-import React, { useEffect, useState } from 'react';
-import { Tabs, Tab } from 'react-bootstrap';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import * as actions from '../../../redux/rooms/roomsActions';
-import { isEqual } from 'lodash';
-import { Formik } from 'formik';
-import {RoomItem} from '../../../components/room_list'
-import { Link } from "react-router-dom";
-import '../../../css/index.css'
+import React, { useEffect, useState } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import * as actions from "../../../redux/rooms/roomsActions";
+import { isEqual } from "lodash";
+import { Formik } from "formik";
+import { RoomItem } from "../../../components/room_list";
+// import { Link } from "react-router-dom";
+import "../../../css/index.css";
 import { useHistory } from "react-router-dom";
-export function RoomsList() { 
-
- 
-
+export function RoomsList() {
   const { roomFilter } = useSelector(
-    (state) => ({      
+    (state) => ({
       roomFilter: state.rooms.entities,
     }),
-    shallowEqual,
+    shallowEqual
   );
   const [queryParams, setQueryParams] = useState({
     filter: {
-      title: '',
-      address: '',
-      nearbyPlace: '',
-      price: '',
-      area: ''
+      title: "",
+      address: "",
+      nearbyPlace: "",
+      price: "",
+      area: "",
     },
-    sortOrder: 'ASC', // ASC|DESC
-    sortField: 'Name',
+    sortOrder: "ASC", // ASC|DESC
+    sortField: "Name",
     pageNumber: 1,
     pageSize: 10,
-  })
+  });
   // Rooms Redux state
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(actions.fetchRoomsFilter(queryParams));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,18 +48,16 @@ export function RoomsList() {
     // Filter by Name
     if (title) {
       filter.title = title;
-    } 
-    else {
+    } else {
       filter.title = "";
     }
     if (address) {
       filter.address = address;
-    } 
-    else {
+    } else {
       filter.address = "";
     }
 
-    filter.address = address  ? address : "";
+    filter.address = address ? address : "";
     filter.nearbyPlace = nearbyPlace ? nearbyPlace : "";
     filter.price = price ? price : "";
     filter.area = address ? area : "";
@@ -80,31 +74,27 @@ export function RoomsList() {
       setQueryParams(newQueryParams);
     }
   };
-  const history = useHistory()
+  const history = useHistory();
   const remoteToDetail = (id) => {
     history.push(`/${id}/roomDetail`);
-  }
+  };
 
   return (
     <>
-      {/* filter */}    
-       <Formik
+      {/* filter */}
+      <Formik
         initialValues={{
-          title: '',
-          address: '',
-          nearbyPlace: '',
-          price: '',
-          area: ''
+          title: "",
+          address: "",
+          nearbyPlace: "",
+          price: "",
+          area: "",
         }}
         onSubmit={(values) => {
           applyFilter(values);
-        }}>
-        {({
-          values,
-          handleSubmit,
-          handleBlur,
-          setFieldValue,
-        }) => (
+        }}
+      >
+        {({ values, handleSubmit, handleBlur, setFieldValue }) => (
           <form onSubmit={handleSubmit} className="form form-label-right">
             <div className="form-group row m-5">
               {/* title */}
@@ -113,11 +103,11 @@ export function RoomsList() {
                   type="text"
                   className="form-control"
                   name="title"
-                  placeholder= "Tiêu đề"
+                  placeholder="Tiêu đề"
                   onBlur={handleBlur}
                   value={values.title}
                   onChange={(e) => {
-                    setFieldValue('title', e.target.value);
+                    setFieldValue("title", e.target.value);
                     handleSubmit();
                   }}
                 />
@@ -127,16 +117,16 @@ export function RoomsList() {
               </div>
 
               {/* address */}
-               <div className="col-lg-4">
+              <div className="col-lg-4">
                 <input
                   type="text"
                   className="form-control"
                   name="address"
-                  placeholder= "Địa chỉ"
+                  placeholder="Địa chỉ"
                   onBlur={handleBlur}
                   value={values.address}
                   onChange={(e) => {
-                    setFieldValue('address', e.target.value);
+                    setFieldValue("address", e.target.value);
                     handleSubmit();
                   }}
                 />
@@ -150,11 +140,11 @@ export function RoomsList() {
                   type="text"
                   className="form-control"
                   name="nearbyPlace"
-                  placeholder= "Điểm công cộng"
+                  placeholder="Điểm công cộng"
                   onBlur={handleBlur}
                   value={values.nearbyPlace}
                   onChange={(e) => {
-                    setFieldValue('nearbyPlace', e.target.value);
+                    setFieldValue("nearbyPlace", e.target.value);
                     handleSubmit();
                   }}
                 />
@@ -182,7 +172,7 @@ export function RoomsList() {
                 </small>
               </div> */}
 
-              {/* typeOfRoom */}            
+              {/* typeOfRoom */}
               {/* <div className="col-lg-4">
                 <input
                   type="text"
@@ -219,34 +209,27 @@ export function RoomsList() {
                   <b>Tìm kiếm theo diện tích</b>
                 </small>
               </div> */}
-             
             </div>
           </form>
         )}
       </Formik>
       <div className="roomlist-container">
-      {
-                    roomFilter && roomFilter.map(room => {
-                      var {_id, address, area, numberOfRoom, price, title,img } = room;
-                      return (                        
-                        <RoomItem  
-                        title={title}
-                        location={address}
-                        price={price}
-                        area={area}
-                        number_of_room={numberOfRoom}
-                        img = {img}
-                        onClick = {() => remoteToDetail(_id)}
-                        />
-                      )
-                    }
-                    )
-                }
+        {roomFilter &&
+          roomFilter.map((room) => {
+            var { _id, address, area, numberOfRoom, price, title, img } = room;
+            return (
+              <RoomItem
+                title={title}
+                location={address}
+                price={price}
+                area={area}
+                number_of_room={numberOfRoom}
+                img={img}
+                onClick={() => remoteToDetail(_id)}
+              />
+            );
+          })}
       </div>
-              
-
-             
-
     </>
   );
 }

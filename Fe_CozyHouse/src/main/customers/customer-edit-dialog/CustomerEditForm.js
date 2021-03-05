@@ -1,27 +1,22 @@
-// Form is based on Formik
-// Data validation is based on Yup
-// Please, be familiar with article first:
-// https://hackernoon.com/react-form-validation-with-formik-and-yup-8b76bda62e10
-import React, { useEffect } from 'react';
-import { Modal } from 'react-bootstrap';
+import React from "react";
+import { Modal } from "react-bootstrap";
 // import * as actionsBank from '../../../../redux/banks/banksActions';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+// import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 import {
   Input,
   DatePickerField,
-  SelectSearch,
+  // SelectSearch,
   Select,
-} from '../../../components/forms';
+} from "../../../components/forms";
 
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import { CustomerType, Gender, CustomerStatus } from '../CustomersUIHelpers';
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import { CustomerType, CustomerStatus } from "../CustomersUIHelpers";
 // import { usePermission } from '../../../../hooks/UsePermission';
-
 
 export function CustomerEditForm({
   saveCustomer,
@@ -33,7 +28,6 @@ export function CustomerEditForm({
   rejectCustomerButtonClick,
   disabled,
 }) {
-
   // const hasEditPermission = usePermission('IPay.Customers.Edit');
 
   // Validation schema
@@ -54,7 +48,8 @@ export function CustomerEditForm({
         validationSchema={CustomerEditSchema}
         onSubmit={(values) => {
           saveCustomer(values);
-        }}>
+        }}
+      >
         {({ handleSubmit, values, setFieldValue }) => (
           <>
             <Modal.Body className="overlay overlay-block cursor-default">
@@ -65,34 +60,30 @@ export function CustomerEditForm({
               )}
               {customer && console.log(customer)}
               <Form className="form form-label-right">
-               {/* chủ trọ và người thuê */}
+                {/* chủ trọ và người thuê */}
                 <FormControl component="fieldset">
                   <RadioGroup
                     aria-label="position"
                     name="role"
-                    value={
-                      disabled ? customer.role : values.role
-                    }
+                    value={disabled ? customer.role : values.role}
                     onChange={(event) => {
                       if (!disabled) {
-                        setFieldValue(
-                          'role',
-                          Number(event.target.value),
-                        );
+                        setFieldValue("role", Number(event.target.value));
                       }
                     }}
-                    disabled = {disabled}
-                    row>
+                    disabled={disabled}
+                    row
+                  >
                     <FormControlLabel
                       value={CustomerType.Renter}
                       control={<Radio />}
-                      label= "Người thuê"
+                      label="Người thuê"
                       labelPlacement="end"
                     />
                     <FormControlLabel
                       value={CustomerType.Owner}
                       control={<Radio />}
-                      label= "Chủ trọ"
+                      label="Chủ trọ"
                       labelPlacement="end"
                     />
                   </RadioGroup>
@@ -105,7 +96,7 @@ export function CustomerEditForm({
                       <Field
                         name="username"
                         component={Input}
-                        placeholder= "Tên chủ trọ"
+                        placeholder="Tên chủ trọ"
                         label={
                           <>
                             Tên chủ trọ
@@ -117,11 +108,10 @@ export function CustomerEditForm({
                       />
                       {disabled &&
                         customer.customerHistory &&
-                        customer.customerHistory.username !== customer.username && (
+                        customer.customerHistory.username !==
+                          customer.username && (
                           <p className="text-warning m-2 text-smail">
-                            <span className="mr-3">
-                              Dữ liệu cũ
-                            </span>
+                            <span className="mr-3">Dữ liệu cũ</span>
                             {customer.customerHistory.username}
                           </p>
                         )}
@@ -143,11 +133,10 @@ export function CustomerEditForm({
                       />
                       {disabled &&
                         customer.customerHistory &&
-                        customer.customerHistory.username !== customer.username && (
+                        customer.customerHistory.username !==
+                          customer.username && (
                           <p className="text-warning m-2 text-smail">
-                            <span className="mr-3">
-                              Dữ liệu cũ:
-                            </span>
+                            <span className="mr-3">Dữ liệu cũ:</span>
                             {customer.customerHistory.username}
                           </p>
                         )}
@@ -173,9 +162,7 @@ export function CustomerEditForm({
                       customer.customerHistory &&
                       customer.customerHistory.email !== customer.email && (
                         <p className="text-warning m-2 text-smail">
-                          <span className="mr-3">
-                            Dữ liệu cũ:
-                          </span>
+                          <span className="mr-3">Dữ liệu cũ:</span>
                           {customer.customerHistory.email}
                         </p>
                       )}
@@ -183,7 +170,7 @@ export function CustomerEditForm({
                 </div>
                 {/* SDT/ Giới tính */}
                 <div className="form-group row">
-                {/* Phone */}
+                  {/* Phone */}
                   <div className="col-lg-6">
                     <Field
                       name="phone"
@@ -202,51 +189,44 @@ export function CustomerEditForm({
                       customer.customerHistory &&
                       customer.customerHistory.phone !== customer.phone && (
                         <p className="text-warning m-2 text-smail">
-                          <span className="mr-3">
-                            Dữ liệu cũ:
-                          </span>
+                          <span className="mr-3">Dữ liệu cũ:</span>
                           {customer.customerHistory.phone}
                         </p>
                       )}
                   </div>
                   {/* IP Gender */}
                   <div className="col-lg-6">
-                        {disabled ? (
-                          <>
-                            <Field
-                              name="gender"
-                              component={Input}
-                              value={customer.gender == 0 ? "Nam" : "Nữ"}
-                              label="Giới tính"
-                              disabled={disabled}
-                            />
-                            {customer.customerHistory &&
-                              customer.customerHistory.gender !==
-                                customer.gender && (
-                                <p className="text-warning m-2 text-smail">
-                                  <span className="mr-3">
-                                    Dữ liệu cũ:
-                                  </span>
-                                  {customer.customerHistory.gender}
-                                </p>
-                              )}
-                          </>
-                        ) : (
-                          <Select name="gender" label="Giới tính">
-                            <option value="0">
-                              Nam
-                            </option>
-                            <option value="1">
-                              Nữ
-                            </option>
-                          </Select>
-                        )}
-                      </div>
-                      {/* Date of birth */}
+                    {disabled ? (
+                      <>
+                        <Field
+                          name="gender"
+                          component={Input}
+                          // eslint-disable-next-line eqeqeq
+                          value={customer.gender == 0 ? "Nam" : "Nữ"}
+                          label="Giới tính"
+                          disabled={disabled}
+                        />
+                        {customer.customerHistory &&
+                          customer.customerHistory.gender !==
+                            customer.gender && (
+                            <p className="text-warning m-2 text-smail">
+                              <span className="mr-3">Dữ liệu cũ:</span>
+                              {customer.customerHistory.gender}
+                            </p>
+                          )}
+                      </>
+                    ) : (
+                      <Select name="gender" label="Giới tính">
+                        <option value="0">Nam</option>
+                        <option value="1">Nữ</option>
+                      </Select>
+                    )}
+                  </div>
+                  {/* Date of birth */}
                 </div>
                 {/* Mật khẩu/ Xác nhận mật khẩu */}
                 <div className="form-group row">
-                {/*Mật khẩu*/}
+                  {/*Mật khẩu*/}
                   <div className="col-lg-6">
                     <Field
                       name="password"
@@ -258,46 +238,46 @@ export function CustomerEditForm({
                           <span className="text-danger"> * </span>
                         </>
                       }
-                      type = "password"
-                      withFeedbackLabel={true}
-                      disabled={disabled}
-                    />                   
-                  </div>
-                  {/* Xác nhận mật khẩu */}
-                  {!disabled && (
-                     <div className="col-lg-6">
-                    <Field
-                      name="confirmPassWord"
-                      component={Input}
-                      placeholder="Xác nhận mật khẩu"
-                      label={
-                        <>
-                          Xác nhận mật khẩu
-                          <span className="text-danger"> * </span>
-                        </>
-                      }
-                      type = "password"
+                      type="password"
                       withFeedbackLabel={true}
                       disabled={disabled}
                     />
                   </div>
-                  ) }
-               
-                {/* Xác nhận mật khẩu */}
+                  {/* Xác nhận mật khẩu */}
+                  {!disabled && (
+                    <div className="col-lg-6">
+                      <Field
+                        name="confirmPassWord"
+                        component={Input}
+                        placeholder="Xác nhận mật khẩu"
+                        label={
+                          <>
+                            Xác nhận mật khẩu
+                            <span className="text-danger"> * </span>
+                          </>
+                        }
+                        type="password"
+                        withFeedbackLabel={true}
+                        disabled={disabled}
+                      />
+                    </div>
+                  )}
+
+                  {/* Xác nhận mật khẩu */}
                 </div>
                 {values.role === CustomerType.Owner && (
                   <>
                     <div className="form-group row">
                       {/* Address */}
-                  <div className="col-lg-4">
-                    <Field
-                      name="address"
-                      component={Input} 
-                      placeholder="Địa chỉ"
-                      label="Địa chỉ"
-                      disabled={disabled}
-                    />
-                  </div>
+                      <div className="col-lg-4">
+                        <Field
+                          name="address"
+                          component={Input}
+                          placeholder="Địa chỉ"
+                          label="Địa chỉ"
+                          disabled={disabled}
+                        />
+                      </div>
                       <div className="col-lg-4">
                         {disabled ? (
                           <>
@@ -311,9 +291,7 @@ export function CustomerEditForm({
                               customer.customerHistory.birthDate !==
                                 customer.birthDate && (
                                 <p className="text-warning m-2 text-smail">
-                                  <span className="mr-3">
-                                    Dữ liệu cũ:
-                                  </span>
+                                  <span className="mr-3">Dữ liệu cũ:</span>
                                   {customer.customerHistory.birthDate}
                                 </p>
                               )}
@@ -342,29 +320,18 @@ export function CustomerEditForm({
                         />
                         {disabled &&
                           customer.customerHistory &&
-                          customer.customerHistory.CMND !==
-                            customer.CMND && (
+                          customer.customerHistory.CMND !== customer.CMND && (
                             <p className="text-warning m-2 text-smail">
-                              <span className="mr-3">
-                                Dữ liệu cũ:
-                              </span>
-                              {
-                                customer.customerHistory
-                                  .CMND
-                              }
+                              <span className="mr-3">Dữ liệu cũ:</span>
+                              {customer.customerHistory.CMND}
                             </p>
                           )}
                       </div>
                     </div>
                   </>
-                ) 
-                }
+                )}
               </Form>
             </Modal.Body>
-
-
-
-
 
             {customer.reasonReject && (
               <div className="m-3">
@@ -381,25 +348,28 @@ export function CustomerEditForm({
                     <>
                       <button
                         className="btn btn-light btn-hover-success"
-                        onClick={() => approveCustomerButtonClick()}>
-                        <i className="far fa-check-circle text-success text-hover-white"></i>{' '}
+                        onClick={() => approveCustomerButtonClick()}
+                      >
+                        <i className="far fa-check-circle text-success text-hover-white"></i>{" "}
                         Duyệt khách hàng
                       </button>
                       <button
                         className="btn btn-light btn-hover-danger btn-elevate"
-                        onClick={() => rejectCustomerButtonClick()}>
-                        <i className="far fa-times-circle text-danger text-hover-white"></i>{' '}
+                        onClick={() => rejectCustomerButtonClick()}
+                      >
+                        <i className="far fa-times-circle text-danger text-hover-white"></i>{" "}
                         Từ chối khách hàng
                       </button>
                     </>
                   )}
                   {/* {hasEditPermission && ( */}
-                    <button
-                      type="button"
-                      onClick={() => editCustomerButtonClick(customer._id)}
-                      className="btn btn-primary btn-elevate">
-                      Sửa thông tin
-                    </button>
+                  <button
+                    type="button"
+                    onClick={() => editCustomerButtonClick(customer._id)}
+                    className="btn btn-primary btn-elevate"
+                  >
+                    Sửa thông tin
+                  </button>
                   {/* )} */}
                 </>
               ) : (
@@ -407,14 +377,16 @@ export function CustomerEditForm({
                   <button
                     type="button"
                     onClick={onHide}
-                    className="btn btn-light btn-elevate">
+                    className="btn btn-light btn-elevate"
+                  >
                     Hủy
                   </button>
                   <> </>
                   <button
                     type="submit"
                     onClick={() => handleSubmit()}
-                    className="btn btn-primary btn-elevate">
+                    className="btn btn-primary btn-elevate"
+                  >
                     Lưu
                   </button>
                 </>

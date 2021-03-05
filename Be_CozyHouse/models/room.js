@@ -15,11 +15,11 @@ const roomSchema = Schema({
     required: true,
   },
   username: {
-    type: String
+    type: String,
   },
   address: {
     type: String,
-    require: true
+    require: true,
   },
   nearbyPlace: String,
   typeOfRoom: Number,
@@ -28,64 +28,69 @@ const roomSchema = Schema({
   rentalTime: String,
   electricWaterPrice: Boolean,
   area: Number,
-    bathroom: {
-      type: Boolean,
-      require: true,
-    }, 
-    electricWaterHeater: {
-      type: Boolean,
-      require: true
-    },
-      kitchen: {
-        type: Number,
-        require: true,
-      },
-      conditioner: {
-        type: Boolean,
-        require: true,
-      },
-      balcony: {
-        type: Boolean,
-        require: true,
-      },
-      otherUtility: {
-        type: String,
-        require: true,
-      },
-  inputTimeRemain: {//thời gian hiển thị (số)
-        type: Number,
-        require: true,
+  bathroom: {
+    type: Boolean,
+    require: true,
   },
-  timeRemain: {//thời gian hiển thị (tuần/tháng/năm)
-        type: Number,
-        require: true,
+  electricWaterHeater: {
+    type: Boolean,
+    require: true,
   },
-  status: { //duyệt bài đăng
-        type: Number,
-        require: true,
+  kitchen: {
+    type: Number,
+    require: true,
   },
-  availability: { //sẵn sàng cho thuê
-        type: Boolean,
-        require: true,
+  conditioner: {
+    type: Boolean,
+    require: true,
   },
-  expired: { //quá hạn bài đăng
-        type: Boolean,
-        require: true,
+  balcony: {
+    type: Boolean,
+    require: true,
+  },
+  otherUtility: {
+    type: String,
+    require: true,
+  },
+  inputTimeRemain: {
+    //thời gian hiển thị (số)
+    type: Number,
+    require: true,
+  },
+  timeRemain: {
+    //thời gian hiển thị (tuần/tháng/năm)
+    type: Number,
+    require: true,
+  },
+  status: {
+    //duyệt bài đăng
+    type: Number,
+    require: true,
+  },
+  availability: {
+    //sẵn sàng cho thuê
+    type: Boolean,
+    require: true,
+  },
+  expired: {
+    //quá hạn bài đăng
+    type: Boolean,
+    require: true,
   },
   view: {
-    type: Number
+    type: Number,
   },
-  vote: {
-    type: Number
+  like: {
+    type: Array,
   },
   report: {
-    type: Boolean
+    type: Boolean,
   },
   reasonReject: {
-    type: String
+    type: String,
   },
   description: {
-    type: String
+    type: String,
   },
   slug: {
     type: String,

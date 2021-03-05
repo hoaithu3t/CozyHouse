@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { Form, Button, Modal, Alert } from "react-bootstrap";
+import React, { useContext } from "react";
+import { Form, Button, Modal } from "react-bootstrap";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -26,7 +26,7 @@ const Login = (props) => {
 
   const [loginApiData, fetchLogin] = useAsync(null, login);
 
-  const [failureModalVisible, setFailureModalVisible] = useState(false);
+  // const [failureModalVisible, setFailureModalVisible] = useState(false);
 
   const moveToDashBoard = () => {
     history.push("/");
@@ -52,7 +52,7 @@ const Login = (props) => {
         })
         .catch((e) => {
           console.log(e);
-          setFailureModalVisible(true);
+          // setFailureModalVisible(true);
         });
     },
   });

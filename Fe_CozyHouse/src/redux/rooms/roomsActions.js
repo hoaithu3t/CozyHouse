@@ -1,5 +1,5 @@
-import * as requestFromServer from './roomsCrud';
-import { roomsSlice, callTypes } from './roomsSlice';
+import * as requestFromServer from "./roomsCrud";
+import { roomsSlice, callTypes } from "./roomsSlice";
 // import moment from 'moment-timezone';
 
 const { actions } = roomsSlice;
@@ -22,8 +22,8 @@ export const fetchRoomsManyView = () => (dispatch) => {
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .getRoomsManyView()
-   .then((response) => {
-     const allRooms = response.data;
+    .then((response) => {
+      const allRooms = response.data;
       dispatch(actions.allRoomsFetched({ allRooms }));
     })
     .catch((error) => {
@@ -45,7 +45,7 @@ export const fetchRooms = (queryParams, token) => (dispatch) => {
     .findRooms(newParams, token)
     .then((response) => {
       const { totalCount, room } = response.data;
-      
+
       dispatch(actions.roomsFetched({ totalCount, entities: room }));
     })
     .catch((error) => {
@@ -65,12 +65,12 @@ export const fetchRoomsFilter = (queryParams) => (dispatch) => {
     skipCount: (queryParams.pageNumber - 1) * queryParams.pageSize,
     maxResultCount: queryParams.pageSize,
   };
-  console.log(newParams)
+  console.log(newParams);
   dispatch(actions.startCall({ callType: callTypes.list }));
   return requestFromServer
     .findRoomsFilter(newParams)
     .then((response) => {
-      const { totalCount, room } = response.data;      
+      const { totalCount, room } = response.data;
       dispatch(actions.roomsFetched({ totalCount, entities: room }));
     })
     .catch((error) => {

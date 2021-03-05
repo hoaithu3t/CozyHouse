@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { shallowEqual, useSelector } from 'react-redux';
 import * as actions from '../../../../redux/customers/customersActions';
 import * as actionsCustomer from '../../../../redux/customers/customersActions';
-import * as actionsBank from '../../../../redux/banks/banksActions';
 
 import {
   Card,
@@ -25,6 +24,7 @@ export default function CustomerEdit({
     params: { id },
   },
 }) {
+  // eslint-disable-next-line no-unused-vars
   const [tab, setTab] = useState('basic');
   const dispatch = useDispatch();
   const { actionsLoading, customerForEdit, allBanks } = useSelector(

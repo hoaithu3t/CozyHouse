@@ -5,7 +5,7 @@
 import React from 'react';
 import SVG from 'react-inlinesvg';
 import { toAbsoluteUrl } from '../../../../helpers';
-import { RoomStatus } from '../../RoomsUIHelpers';
+// import { RoomStatus } from '../../RoomsUIHelpers';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 export function ActionsColumnFormatter(

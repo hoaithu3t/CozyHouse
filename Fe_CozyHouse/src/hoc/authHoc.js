@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { useAsync } from "react-hook-async";
-import ReactLoading from "react-loading";
+import React, { useContext } from "react";
+// import { useAsync } from "react-hook-async";
+// import ReactLoading from "react-loading";
 import authCtx from "../contexts/auth";
 import Dashboard from "../components/dashboard/dashboard";
 
-import { me } from "../api/profile";
+// import { me } from "../api/profile";
 
 const withAuth = (WrappedComponent) => (props) => {
+  // eslint-disable-next-line no-unused-vars
   const { authUser, setAuthUser } = useContext(authCtx);
 
-  const [profileApi, fetchProfile] = useAsync(null, me);
+  // const [profileApi, fetchProfile] = useAsync(null, me);
 
   // useEffect(() => {
   //   if (!authUser) {

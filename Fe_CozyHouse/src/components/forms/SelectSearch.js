@@ -1,6 +1,6 @@
-import React from 'react';
-import Select from 'react-select';
-import { FieldFeedbackLabel } from './FieldFeedbackLabel';
+import React from "react";
+import Select from "react-select";
+import { FieldFeedbackLabel } from "./FieldFeedbackLabel";
 
 // const getFieldCSSClasses = (touched, errors) => {
 //   const classes = ['form-control', 'form-control-solid'];
@@ -31,7 +31,7 @@ export function SelectSearch({
         options={options}
         name={field.name}
         value={
-          options ? options.find((option) => option.value === field.value) : ''
+          options ? options.find((option) => option.value === field.value) : ""
         }
         onChange={(option) => setFieldValue(field.name, option.value)}
         onBlur={field.onBlur}

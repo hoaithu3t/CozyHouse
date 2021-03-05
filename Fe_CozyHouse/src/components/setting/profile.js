@@ -5,7 +5,7 @@ import { Form, Button, Container } from "react-bootstrap";
 import { useFormik } from "formik";
 import { useAsync } from "react-hook-async";
 
-import Avatar from "../avatar";
+// import Avatar from "../avatar";
 
 import authCtx from "../../contexts/auth";
 import { uploadFile } from "../../api/file";
@@ -46,7 +46,7 @@ const Profile = () => {
         </h3>
         <Form onSubmit={formik.handleSubmit}>
           <Form.Group>
-            <Form.Label className="code">Photo</Form.Label>
+            <Form.Label className="code"></Form.Label>
             <div className="align-items-center">
               {uploadFileApi.loading ? (
                 "Loading ..."

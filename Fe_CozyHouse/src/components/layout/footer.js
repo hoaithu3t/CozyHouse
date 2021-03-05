@@ -1,33 +1,29 @@
 import React from "react";
-import instagramIcon from "./instagram.png";
-import facebookIcon from "./facebook.png";
-import youtubeIcon from "./youtube.png";
-import locationPin from "./location-pin.png";
-import round_call from "./round_call.png";
-
-
-
 import "../../css/footer.css";
-
-
 
 const Footer = () => {
   return (
     <div className="footer">
-     
-
-
-      
       <div className="aboutUse">
-        <div className="cosyHome"><h2>CozyHome</h2></div>
-        <div className="enhance"><p>Nâng tầm trải nghiệm tìm nhà</p></div>
+        <div className="cosyHome">
+          <h2>CozyHome</h2>
+        </div>
+        <div className="enhance">
+          <p>Enhance the home search experience</p>
+        </div>
       </div>
       <div className="founder">
         <h4>Our Team</h4>
         <ul>
-          <li className="b"><i class="material-icons icon person">person</i> Võ Lương Bằng</li>
-          <li className= "t"><i class="material-icons icon person">person</i> Lưu Thị Hoài Thu</li>
-          <li className="v"><i class="material-icons icon person">person</i> Đỗ Ngọc Thanh Vân</li>
+          <li className="b">
+            <i class="material-icons icon person">person</i> Vo Luong Bang
+          </li>
+          <li className="t">
+            <i class="material-icons icon person">person</i> Luu Thi Hoai Thu
+          </li>
+          <li className="v">
+            <i class="material-icons icon person">person</i> Do Ngoc Thanh Van
+          </li>
         </ul>
       </div>
       <div className="contact">
@@ -35,7 +31,7 @@ const Footer = () => {
         <ul>
           <li>
             <i class="material-icons">edit_location</i>
-            Số 22 Thành Công - Ba Đình - Hà Nội
+            144 Xuan Thuy - Cau Giay - Ha Noi
           </li>
           <li>
             <i class="material-icons">phone_iphone</i>

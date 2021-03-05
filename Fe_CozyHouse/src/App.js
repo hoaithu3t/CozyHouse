@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import ReactDOM from 'react-dom'
-
 import { Header } from "./components/layout";
 import { Footer } from "./components/layout";
 
@@ -9,7 +7,6 @@ import ReactLoading from "react-loading";
 import AuthContext from "./contexts/auth";
 import { useAsync } from "react-hook-async";
 import { Dashboard } from "./components/dashboard";
-import RoomList from "./components/room_list/RoomList";
 import {RoomsList} from "./main/rooms/room-list/RoomsList"
 import {RoomDetail} from '../src/main/rooms/room-detail/RoomDetail'
 
